@@ -10,11 +10,12 @@ import SwiftUI
 public struct OneLineField: View {
     @Binding var txt : String
 //    @Binding var isSecured : Bool
-    @State var isSecured : Bool = false
+    @State var isSecured : Bool = true
     @Binding var errorText : String
     var shouldHasBorder : Bool
     var hasError : Bool = false
     var placeHolder : String = "PlaceHolder"
+    var placeHolderColor : Color = .gray.opacity(0.7)
     var isPassword : Bool = false
     var checkStrength : Bool = false
     var disabled : Bool = false
@@ -25,8 +26,9 @@ public struct OneLineField: View {
     var radius : CGFloat = 11.5
     var textSize : CGFloat = 14
     var textWeight : Font.Weight = .regular
+    var textColor : Color = .black
     var fieldBackgroundColor : Color = .white
-    var height: CGFloat = msViews.margins.mainButtonHeight
+    var height: CGFloat = swiftuiHelper.margins.mainButtonHeight
     var onSubmit : ((String)->Void)! = nil
     var onTextChange: ((String)->Void)! = nil
     
@@ -34,6 +36,7 @@ public struct OneLineField: View {
         txt:Binding<String>,
         errorText:Binding<String>,
         placeHolder:String = "" ,
+        placeHolderColor: Color = .gray.opacity(0.7),
         isPassword:Bool = false,
 //        isSecured:Binding<Bool> = .constant(false),
         checkStrength:Bool = false,
@@ -47,14 +50,16 @@ public struct OneLineField: View {
         radius:CGFloat = 11.5,
         textSize:CGFloat = 14,
         textWeight:Font.Weight = .regular ,
+        textColor: Color = .black,
         fieldBackgroundColor : Color = .white,
-        height: CGFloat = msViews.margins.mainButtonHeight,
+        height: CGFloat = swiftuiHelper.margins.mainButtonHeight,
         onSubmit:@escaping (String)->Void,
         onTextChange:@escaping (String)->Void
     ) {
         self._txt = txt
         self._errorText = errorText
         self.placeHolder = placeHolder
+        self.placeHolderColor = placeHolderColor
         self.isPassword = isPassword
 //        self._isSecured = isSecured
         self.checkStrength = checkStrength
@@ -66,6 +71,7 @@ public struct OneLineField: View {
         self.radius = radius
         self.textSize = textSize
         self.textWeight = textWeight
+        self.textColor = textColor
         self.height = height
         self.onSubmit = onSubmit
         self.onTextChange = onTextChange
@@ -100,13 +106,13 @@ public struct OneLineField: View {
     
     @ViewBuilder var errorMessage : some View {
         Text(errorText)
-            .foregroundColor(msViews.viewsHelper.errorColor)
+            .foregroundColor(swiftuiHelper.viewsHelper.errorColor)
             .font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight))
     }
     
     @ViewBuilder var oneLineField : some View {
         textField
-        //            .foregroundColor(msViews.viewsHelper.placeHolderTextColor)
+            .foregroundStyle(textColor)
             .font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight))
             .padding(.horizontal , padding)
             .frame(height: height)
@@ -156,7 +162,8 @@ public struct OneLineField: View {
         if ( isPassword && isSecured ) {
             SecureField(placeHolder , text: textBinding)
         } else {
-            TextField(placeHolder , text: textBinding)
+//            TextField(placeHolder , text: textBinding)
+            TextField("", text: textBinding, prompt: Text(placeHolder).font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight)).foregroundColor(placeHolderColor))
         }
     }
     
@@ -164,15 +171,15 @@ public struct OneLineField: View {
         if(errorText.isEmpty && !hasError){
             if(shouldHasBorder) {
                 if(txt.isEmpty) {
-                    return msViews.viewsHelper.secondBorderColor
+                    return swiftuiHelper.viewsHelper.secondBorderColor
                 } else {
-                    return msViews.viewsHelper.thirdBorderColor
+                    return swiftuiHelper.viewsHelper.thirdBorderColor
                 }
             } else {
                 return .clear
             }
         } else {
-            return msViews.viewsHelper.errorColor
+            return swiftuiHelper.viewsHelper.errorColor
         }
     }
     

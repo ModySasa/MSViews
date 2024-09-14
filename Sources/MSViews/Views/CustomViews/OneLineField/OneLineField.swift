@@ -28,7 +28,7 @@ public struct OneLineField: View {
     var textWeight : Font.Weight = .regular
     var textColor : Color = .black
     var fieldBackgroundColor : Color = .white
-    var height: CGFloat = swiftuiHelper.margins.mainButtonHeight
+    var height: CGFloat = msViews.margins.mainButtonHeight
     var onSubmit : ((String)->Void)! = nil
     var onTextChange: ((String)->Void)! = nil
     
@@ -52,7 +52,7 @@ public struct OneLineField: View {
         textWeight:Font.Weight = .regular ,
         textColor: Color = .black,
         fieldBackgroundColor : Color = .white,
-        height: CGFloat = swiftuiHelper.margins.mainButtonHeight,
+        height: CGFloat = msViews.margins.mainButtonHeight,
         onSubmit:@escaping (String)->Void,
         onTextChange:@escaping (String)->Void
     ) {
@@ -106,7 +106,7 @@ public struct OneLineField: View {
     
     @ViewBuilder var errorMessage : some View {
         Text(errorText)
-            .foregroundColor(swiftuiHelper.viewsHelper.errorColor)
+            .foregroundColor(msViews.viewsHelper.errorColor)
             .font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight))
     }
     
@@ -171,15 +171,15 @@ public struct OneLineField: View {
         if(errorText.isEmpty && !hasError){
             if(shouldHasBorder) {
                 if(txt.isEmpty) {
-                    return swiftuiHelper.viewsHelper.secondBorderColor
+                    return msViews.viewsHelper.secondBorderColor
                 } else {
-                    return swiftuiHelper.viewsHelper.thirdBorderColor
+                    return msViews.viewsHelper.thirdBorderColor
                 }
             } else {
                 return .clear
             }
         } else {
-            return swiftuiHelper.viewsHelper.errorColor
+            return msViews.viewsHelper.errorColor
         }
     }
     

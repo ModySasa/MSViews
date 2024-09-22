@@ -13,6 +13,8 @@ public struct OneLineField: View {
     @State var isSecured : Bool = true
     @Binding var errorText : String
     var shouldHasBorder : Bool
+    var emptyBorderColor : Color = msViews.viewsHelper.secondBorderColor
+    var borderColor : Color = msViews.viewsHelper.thirdBorderColor
     var hasError : Bool = false
     var placeHolder : String = "PlaceHolder"
     var placeHolderColor : Color = .gray.opacity(0.7)
@@ -42,6 +44,8 @@ public struct OneLineField: View {
         checkStrength:Bool = false,
         disabled:Bool = false,
         shouldHasBorder : Bool = true ,
+        emptyBorderColor:Color = msViews.viewsHelper.secondBorderColor,
+        borderColor:Color = msViews.viewsHelper.thirdBorderColor,
         hasError : Bool = false,
         type:UIKeyboardType = .default,
         submitLabel:SubmitLabel = .return,
@@ -77,6 +81,8 @@ public struct OneLineField: View {
         self.onTextChange = onTextChange
         self.fieldBackgroundColor = fieldBackgroundColor
         self.shouldHasBorder = shouldHasBorder
+        self.emptyBorderColor = emptyBorderColor
+        self.borderColor = borderColor
         self.hasError = hasError
     }
     
@@ -171,9 +177,9 @@ public struct OneLineField: View {
         if(errorText.isEmpty && !hasError){
             if(shouldHasBorder) {
                 if(txt.isEmpty) {
-                    return msViews.viewsHelper.secondBorderColor
+                    return emptyBorderColor
                 } else {
-                    return msViews.viewsHelper.thirdBorderColor
+                    return borderColor
                 }
             } else {
                 return .clear

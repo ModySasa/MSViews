@@ -10,11 +10,13 @@ import SwiftUI
 public struct OneLineField: View {
     @Binding var txt : String
 //    @Binding var isSecured : Bool
-    @State var isSecured : Bool = false
+    @State var isSecured : Bool = true
     @Binding var errorText : String
     var shouldHasBorder : Bool
+    var borderColor : Color = msViews.viewsHelper.borderColor
     var hasError : Bool = false
     var placeHolder : String = "PlaceHolder"
+    var placeHolderColor : Color = .gray.opacity(0.7)
     var isPassword : Bool = false
     var checkStrength : Bool = false
     var disabled : Bool = false
@@ -25,6 +27,7 @@ public struct OneLineField: View {
     var radius : CGFloat = 11.5
     var textSize : CGFloat = 14
     var textWeight : Font.Weight = .regular
+    var textColor : Color = .black
     var fieldBackgroundColor : Color = .white
     var height: CGFloat = msViews.margins.mainButtonHeight
     var onSubmit : ((String)->Void)! = nil
@@ -34,11 +37,13 @@ public struct OneLineField: View {
         txt:Binding<String>,
         errorText:Binding<String>,
         placeHolder:String = "" ,
+        placeHolderColor: Color = .gray.opacity(0.7),
         isPassword:Bool = false,
 //        isSecured:Binding<Bool> = .constant(false),
         checkStrength:Bool = false,
         disabled:Bool = false,
         shouldHasBorder : Bool = true ,
+        borderColor:Color = msViews.viewsHelper.borderColor,
         hasError : Bool = false,
         type:UIKeyboardType = .default,
         submitLabel:SubmitLabel = .return,
@@ -47,6 +52,7 @@ public struct OneLineField: View {
         radius:CGFloat = 11.5,
         textSize:CGFloat = 14,
         textWeight:Font.Weight = .regular ,
+        textColor: Color = .black,
         fieldBackgroundColor : Color = .white,
         height: CGFloat = msViews.margins.mainButtonHeight,
         onSubmit:@escaping (String)->Void,
@@ -55,6 +61,7 @@ public struct OneLineField: View {
         self._txt = txt
         self._errorText = errorText
         self.placeHolder = placeHolder
+        self.placeHolderColor = placeHolderColor
         self.isPassword = isPassword
 //        self._isSecured = isSecured
         self.checkStrength = checkStrength
@@ -66,11 +73,13 @@ public struct OneLineField: View {
         self.radius = radius
         self.textSize = textSize
         self.textWeight = textWeight
+        self.textColor = textColor
         self.height = height
         self.onSubmit = onSubmit
         self.onTextChange = onTextChange
         self.fieldBackgroundColor = fieldBackgroundColor
         self.shouldHasBorder = shouldHasBorder
+        self.borderColor = borderColor
         self.hasError = hasError
     }
     
@@ -106,7 +115,7 @@ public struct OneLineField: View {
     
     @ViewBuilder var oneLineField : some View {
         textField
-        //            .foregroundColor(msViews.viewsHelper.placeHolderTextColor)
+            .foregroundStyle(textColor)
             .font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight))
             .padding(.horizontal , padding)
             .frame(height: height)
@@ -156,18 +165,15 @@ public struct OneLineField: View {
         if ( isPassword && isSecured ) {
             SecureField(placeHolder , text: textBinding)
         } else {
-            TextField(placeHolder , text: textBinding)
+//            TextField(placeHolder , text: textBinding)
+            TextField("", text: textBinding, prompt: Text(placeHolder).font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight)).foregroundColor(placeHolderColor))
         }
     }
     
     func getBorderColor() -> Color {
         if(errorText.isEmpty && !hasError){
             if(shouldHasBorder) {
-                if(txt.isEmpty) {
-                    return msViews.viewsHelper.secondBorderColor
-                } else {
-                    return msViews.viewsHelper.thirdBorderColor
-                }
+                return borderColor
             } else {
                 return .clear
             }

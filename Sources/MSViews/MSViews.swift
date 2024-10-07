@@ -4,7 +4,7 @@ import SwiftUI
 
 public struct MSViews {
     
-    public init(_ appFont:FontNames ,_ arabicFontName:FontNames? = nil  , appColors : AppColors , textSizes : TextSizes , margins : Margins){
+    private init(_ appFont:FontNames ,_ arabicFontName:FontNames? = nil  , appColors : AppColors , textSizes : TextSizes , margins : Margins){
         setAppFontName(appFont)
         if let arabicFontName = arabicFontName{
             setArabicAppFontName(arabicFontName)
@@ -12,6 +12,24 @@ public struct MSViews {
         self.viewsHelper = .init(appColors:appColors)
         self.textSizes = textSizes
         self.margins = margins
+    }
+    
+    // Static property to hold the singleton instance
+    private static var instance: MSViews?
+    
+    public static func initialize(_ appFont:FontNames ,_ arabicFontName:FontNames? = nil  , appColors : AppColors , textSizes : TextSizes , margins : Margins) {
+        guard instance == nil else {
+            fatalError("MSViews has already been initialized.")
+//            return
+        }
+        instance = .init(appFont, arabicFontName, appColors: appColors, textSizes: textSizes, margins: margins)
+    }
+    
+    public static var shared: MSViews {
+        guard let instance = instance else {
+            fatalError("MSViews has not been initialized. Call initialize(colors:) first.")
+        }
+        return instance
     }
     
     public func addNotCountObserver(_ afterChange : @escaping ()->Void){

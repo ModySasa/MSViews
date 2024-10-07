@@ -69,7 +69,7 @@ struct AudioRecorder : View {
                         }
                 }
                 .font(.system(size: 25))
-                .foregroundColor(ViewHelpers.shared.mainAppColor)
+                .foregroundColor(MSViews.shared.viewsHelper.mainAppColor)
             }
         }
     }

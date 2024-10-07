@@ -19,4 +19,4 @@ public var notCount: Int = -1 {
     }
 }
 
-public let msViews = MSViews.init()
+public let msViews = MSViews.shared

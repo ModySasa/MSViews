@@ -7,50 +7,48 @@
 
 import Foundation
 
-public class TextSizes{
-    public static let shared = TextSizes.init()
+public struct TextSizes{
+    public let title : CGFloat
+    public let titleLineSpacing : CGFloat
+    public let titleMonoSpacing : CGFloat
     
-    public var title : CGFloat = 20
-    public var titleLineSpacing : CGFloat = 29
-    public var titleMonoSpacing : CGFloat = 0 / 100
+    public let large_title : CGFloat
+    public let large_titleLineSpacing : CGFloat
+    public let large_titleMonoSpacing : CGFloat
     
-    public var large_title : CGFloat = 24
-    public var large_titleLineSpacing : CGFloat = 29
-    public var large_titleMonoSpacing : CGFloat = 0 / 100
+    public let main : CGFloat
+    public let mainLineSpacing : CGFloat
+    public let mainMonoSpacing : CGFloat
     
-    public var main : CGFloat = 14
-    public var mainLineSpacing : CGFloat = 20
-    public var mainMonoSpacing : CGFloat = 0 / 100
+    public let header : CGFloat
+    public let headerLineSpacing : CGFloat
+    public let headerMonoSpacing : CGFloat
     
-    public var header : CGFloat = 18
-    public var headerLineSpacing : CGFloat = 26
-    public var headerMonoSpacing : CGFloat = 0 / 100
+    public let placeHolder : CGFloat
+    public let placeHolderLineSpacing : CGFloat
+    public let placeHolderMonoSpacing : CGFloat
     
-    public var placeHolder : CGFloat = 14
-    public var placeHolderLineSpacing : CGFloat = 20
-    public var placeHolderMonoSpacing : CGFloat = 0 / 100
+    public let button : CGFloat
+    public let buttonLineSpacing : CGFloat
+    public let buttonMonoSpacing : CGFloat
     
-    public var button : CGFloat = 16
-    public var buttonLineSpacing : CGFloat = 16
-    public var buttonMonoSpacing : CGFloat = 50 / 100
+    public let tabBar : CGFloat
+    public let tabBarLineSpacing : CGFloat
+    public let tabBarMonoSpacing : CGFloat
     
-    public var tabBar : CGFloat = 14
-    public var tabBarLineSpacing : CGFloat = 10
-    public var tabBarMonoSpacing : CGFloat = 0 / 100
+    public let price : CGFloat
+    public let priceLineSpacing : CGFloat
+    public let priceMonoSpacing : CGFloat
     
-    public var price : CGFloat = 16
-    public var priceLineSpacing : CGFloat = 23
-    public var priceMonoSpacing : CGFloat = 0 / 100
+    public let badge : CGFloat
+    public let badgeLineSpacing : CGFloat
+    public let badgeMonoSpacing : CGFloat
     
-    public var badge : CGFloat = 14
-    public var badgeLineSpacing : CGFloat = 14
-    public var badgeMonoSpacing : CGFloat = 0 / 100
+    public let badge_small : CGFloat
+    public let badge_smallLineSpacing : CGFloat
+    public let badge_smallMonoSpacing : CGFloat
     
-    public var badge_small : CGFloat = 10
-    public var badge_smallLineSpacing : CGFloat = 14
-    public var badge_smallMonoSpacing : CGFloat = 0 / 100
-    
-    public func setTextSizes(
+    public init(
         title : CGFloat = 20,
         titleLineSpacing : CGFloat = 29,
         titleMonoSpacing : CGFloat = 0,

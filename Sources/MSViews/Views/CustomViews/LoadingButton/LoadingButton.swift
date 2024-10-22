@@ -96,7 +96,7 @@ public struct LoadingButton: View {
                                     Image(buttonImage)
                                 }
                                 Text(buttonText)
-                                    .textStyle(.button)
+//                                    .textStyle(.button)
                                     .foregroundColor(
                                         mainColor
                                     )

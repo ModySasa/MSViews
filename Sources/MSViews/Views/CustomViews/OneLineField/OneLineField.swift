@@ -37,7 +37,7 @@ public struct OneLineField: View {
         txt:Binding<String>,
         errorText:Binding<String>,
         placeHolder:String = "" ,
-        placeHolderColor: Color = .gray.opacity(0.7),
+        placeHolderColor: Color = placeHolderColor,
         isPassword:Bool = false,
 //        isSecured:Binding<Bool> = .constant(false),
         checkStrength:Bool = false,

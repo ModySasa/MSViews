@@ -163,8 +163,6 @@ public struct OneLineField: View {
             }
         })
         if ( isPassword && isSecured ) {
-            SecureField(placeHolder , text: textBinding)
-            
             SecureField("", text: textBinding, prompt: Text(placeHolder).font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight)).foregroundColor(placeHolderColor))
             
         } else {

@@ -52,25 +52,25 @@ public class Intents {
         
         let application = UIApplication.shared
         
-        if application.canOpenURL(facebookURL) {
+        if application.canOpenURL(facebookURL!) {
             // Open Facebook app
-            application.open(facebookURL, options: [:], completionHandler: nil)
+            application.open(facebookURL!, options: [:], completionHandler: nil)
         } else {
             // Open Safari with the Facebook page URL
-            application.open(safariURL, options: [:], completionHandler: nil)
+            application.open(safariURL!, options: [:], completionHandler: nil)
         }
     }
     
     public func openYouTube(_ link:String) {
-        let facebookURL = page_id.starts(with: "youtube://") ? URL(string: link) : URL( string: "youtube://\(link)")!
-        let safariURL = page_id.starts(with: "https://") ? URL(string: link) : URL(string: "https://www.youtube.com/\(link)")!
+        let youTubeUrl = link.starts(with: "youtube://") ? URL(string: link) : URL( string: "youtube://\(link)")!
+        let safariURL = link.starts(with: "https://") ? URL(string: link) : URL(string: "https://www.youtube.com/\(link)")!
         
         let application = UIApplication.shared
         
-        if application.canOpenURL(facebookURL) {
-            application.open(facebookURL, options: [:], completionHandler: nil)
+        if application.canOpenURL(youTubeUrl!) {
+            application.open(youTubeUrl!, options: [:], completionHandler: nil)
         } else {
-            application.open(safariURL, options: [:], completionHandler: nil)
+            application.open(safariURL!, options: [:], completionHandler: nil)
         }
     }
     

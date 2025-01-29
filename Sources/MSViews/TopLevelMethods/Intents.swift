@@ -47,8 +47,8 @@ public class Intents {
     }
     
     public func openFacebook(_ page_id:String) {
-        let facebookURL = URL(string: "fb://profile/\(page_id)")!
-        let safariURL = URL(string: "https://www.facebook.com/\(page_id)")!
+        let facebookURL = page_id.starts(with: "fb://") ? URL(string: page_id) : URL( string: "fb://profile/\(page_id)")!
+        let safariURL = page_id.starts(with: "https://") ? URL(string: page_id) : URL(string: "https://www.facebook.com/\(page_id)")!
         
         let application = UIApplication.shared
         
@@ -60,6 +60,20 @@ public class Intents {
             application.open(safariURL, options: [:], completionHandler: nil)
         }
     }
+    
+    public func openYouTube(_ link:String) {
+        let facebookURL = page_id.starts(with: "youtube://") ? URL(string: link) : URL( string: "youtube://\(link)")!
+        let safariURL = page_id.starts(with: "https://") ? URL(string: link) : URL(string: "https://www.youtube.com/\(link)")!
+        
+        let application = UIApplication.shared
+        
+        if application.canOpenURL(facebookURL) {
+            application.open(facebookURL, options: [:], completionHandler: nil)
+        } else {
+            application.open(safariURL, options: [:], completionHandler: nil)
+        }
+    }
+    
     
     public func openAppStoreOnMyApp(_ link : String){
         if let url = URL(string: link),
@@ -76,8 +90,8 @@ public class Intents {
     }
     
     public func openInstagram(_ username:String) {
-        let instagramURL = username.starts(with: "instagram://") ? URL(string: "instagram://user?username=\(username)")! : URL(string: username)
-        let safariURL =  username.starts(with: "https://") ? URL(string: "https://www.instagram.com/\(username)")! : URL(string: username)
+        let instagramURL = username.starts(with: "instagram://") ? URL(string: username) : URL(string: "instagram://user?username=\(username)")!
+        let safariURL =  username.starts(with: "https://") ? URL(string: username) : URL(string: "https://www.instagram.com/\(username)")!
         
         let application = UIApplication.shared
         

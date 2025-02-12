@@ -23,6 +23,7 @@ public enum FontNames:String {
     case raleway = "Raleway"
     case robotoSlab = "Roboto Slab"
     case gabarito = "Gabarito"
+    case chivo = "Chivo"
 }
 
 public func setAppFontName(_ name:FontNames){

@@ -41,12 +41,14 @@ public class TimeMethods {
         return dateFormatterGet.string(from: date)
     }
     
-    public func getDateFormated(_ stringDate : String , inFormante: String = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ" , outFormate: String = "dd MMMM yyyy") -> String {
+    public func getDateFormated(_ stringDate : String , inFormante: String = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ" , outFormate: String = "dd MMMM yyyy" , locale: String = "") -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = inFormante
         let date = formatter.date(from: stringDate)
         formatter.dateFormat = outFormate
-        
+        if !locale.isEmpty{
+            formatter.locale = Locale(identifier: locale)
+        }
         return formatter.string(from: date ?? Date())
     }
     

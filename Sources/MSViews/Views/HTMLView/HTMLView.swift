@@ -30,20 +30,34 @@ public struct HTMLView: UIViewRepresentable {
             if let data = htmlString.data(using: .utf8) {
                 let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
                     .documentType: NSAttributedString.DocumentType.html,
-                    .characterEncoding: String.Encoding.utf8.rawValue // Specify the text encoding
+                    .characterEncoding: String.Encoding.utf8.rawValue
                 ]
                 
-                let attributedString = try NSAttributedString(
+                let attributedString = try NSMutableAttributedString(
                     data: data,
                     options: options,
                     documentAttributes: nil
                 )
-                uiView.attributedText = attributedString
                 
-                // Specify a font that supports Arabic characters
-                uiView.font = UIFont(name: appFontName, size: 14) // Replace with a suitable Arabic font and size
+                // Set font
+                let range = NSRange(location: 0, length: attributedString.length)
+                attributedString.addAttribute(.font, value: UIFont(name: appFontName, size: 14) ?? UIFont.systemFont(ofSize: 14), range: range)
+                attributedString.addAttribute(.foregroundColor, value: fontColor, range: range)
+                
+                // Detect language
+                let detectedLang = NSLinguisticTagger.dominantLanguage(for: htmlString)
+                let isRTL = detectedLang == "ar" || detectedLang == "he"
+                
+                // Set alignment based on language
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.alignment = isRTL ? .right : .left
+                attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: range)
+                
+                // Apply to UITextView
+                uiView.attributedText = attributedString
                 uiView.backgroundColor = color
-                uiView.textColor = fontColor
+                uiView.textAlignment = isRTL ? .right : .left
+                uiView.semanticContentAttribute = isRTL ? .forceRightToLeft : .forceLeftToRight
             }
         } catch {
             print("Error parsing HTML: \(error)")
@@ -54,7 +68,7 @@ public struct HTMLView: UIViewRepresentable {
 
 struct HTMLView_Previews: PreviewProvider {
     static var previews: some View {
-        HTMLView("Test me now" , color: .clear)
+        HTMLView("Test me now\n Who cares?" , color: .clear)
     }
 }
 

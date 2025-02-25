@@ -1,6 +1,6 @@
 //
 //  DropdownMenuView.swift
-//  
+//
 //
 //  Created by Corptia 02 on 17/09/2023.
 //
@@ -39,4 +39,5 @@ public struct DropdownMenuView<Label:View>: View {
             label($selectedOption)
         }
     }
+    
 }

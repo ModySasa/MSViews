@@ -23,15 +23,19 @@ public struct DropdownMenuView<Label:View>: View {
     }
     
     public var body: some View {
-        Menu {
-            ForEach(options, id: \.self) { option in
-                Button(action: {
-                    selectedOption = option
-                }) {
-                    Text(option)
+        if (!options.isEmpty) {
+            Menu {
+                ForEach(options, id: \.self) { option in
+                    Button(action: {
+                        selectedOption = option
+                    }) {
+                        Text(option)
+                    }
                 }
+            } label: {
+                label($selectedOption)
             }
-        } label: {
+        } else {
             label($selectedOption)
         }
     }

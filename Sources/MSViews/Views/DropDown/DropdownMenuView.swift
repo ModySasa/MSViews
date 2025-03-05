@@ -29,7 +29,7 @@ public struct DropdownMenuView<Label:View>: View {
                     Button(action: {
                         selectedOption = option
                     }) {
-                        Text(option)
+                        Text(LocalizedStringKey(option))
                     }
                 }
             } label: {

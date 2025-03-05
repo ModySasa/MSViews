@@ -6,17 +6,12 @@
 //
 
 import Foundation
-import SwiftUI
 
 public struct PickerItem : Identifiable , Hashable {
     public var id : Int
     public var title : String
     public var Image : String?
     public var object : AnyHashable
-    
-    public var localizedTitle: LocalizedStringKey {
-            LocalizedStringKey(title)
-        }
     
     public init(id: Int, title: String, Image: String? = nil, object: AnyHashable) {
         self.id = id

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 public struct PickerItem : Identifiable , Hashable {
     public var id : Int

@@ -150,8 +150,8 @@ struct CustomTitleModifier : ViewModifier {
                 .kerning(monoSpacing / 100)
         } else {
             content
-                .font(.custom(getAppFont(fontWeight), size: textSize).weight(fontWeight))
-//                .lineSpacing(lineSpacing)
+//                .font(.custom(getAppFont(fontWeight), size: textSize).weight(fontWeight))
+                .lineSpacing(lineSpacing)
         }
     }
 }

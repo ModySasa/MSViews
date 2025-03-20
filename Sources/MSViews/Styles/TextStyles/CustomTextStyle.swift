@@ -160,56 +160,58 @@ public extension View {
     @ViewBuilder func textStyle(_ style:CustomTextStyle , size:CGFloat = 14 , lineSpacing : CGFloat = 20 , monoSpacing : CGFloat = 0 , fontWeight : Font.Weight? = nil) -> some View{
         switch style {
         case .title:
-            if let fontWeight {
-                modifier(TitleModifier(fontWeight: fontWeight))
+            if(fontWeight != nil) {
+                modifier(TitleModifier(fontWeight: fontWeight!))
             } else {
                 modifier(TitleModifier())
             }
         case .price:
-            if let fontWeight {
-                modifier(PriceModifier(fontWeight: fontWeight))
+            if(fontWeight != nil) {
+                modifier(PriceModifier(fontWeight: fontWeight!))
             } else {
                 modifier(PriceModifier())
             }
         case .header:
-            if let fontWeight {
-                modifier(HeaderModifier(fontWeight: fontWeight))
+            if(fontWeight != nil) {
+                modifier(HeaderModifier(fontWeight: fontWeight!))
             } else {
                 modifier(HeaderModifier())
             }
+            
         case .button:
-            if let fontWeight {
-                modifier(ButtonTitleModifier(fontWeight: fontWeight))
+            if(fontWeight != nil) {
+                modifier(ButtonTitleModifier(fontWeight: fontWeight!))
             } else {
                 modifier(ButtonTitleModifier())
             }
         case .placeHolder:
-            if let fontWeight {
-                modifier(PlaceHolderTitleModifier(fontWeight: fontWeight))
+            if(fontWeight != nil) {
+                modifier(PlaceHolderTitleModifier(fontWeight: fontWeight!))
             } else {
                 modifier(PlaceHolderTitleModifier())
             }
         case .tabBar:
-            if let fontWeight {
-                modifier(TabBarTitleModifier(fontWeight: fontWeight))
+            if(fontWeight != nil) {
+                modifier(TabBarTitleModifier(fontWeight: fontWeight!))
             } else {
                 modifier(TabBarTitleModifier())
             }
         case .custom:
-            if let fontWeight {
+            if(fontWeight != nil) {
                 if #available(iOS 16.0, *) {
-                    modifier(CustomTitleModifier(textSize: size, lineSpacing: lineSpacing, monoSpacing: monoSpacing , fontWeight: fontWeight))
+                    modifier(CustomTitleModifier(textSize: size, lineSpacing: lineSpacing, monoSpacing: monoSpacing , fontWeight: fontWeight!))
                 } else {
-                    font(.body)
+//                    font(.body)
+//                    modifier(CustomTitleModifier(textSize: size, lineSpacing: lineSpacing, monoSpacing: monoSpacing , fontWeight: fontWeight!))
 //                    font(.custom(getAppFont(fontWeight), size: textSize).weight(fontWeight))
-                    .lineSpacing(lineSpacing)
+//                    .lineSpacing(lineSpacing)
                 }
             } else {
                 modifier(CustomTitleModifier(textSize: size, lineSpacing: lineSpacing, monoSpacing: monoSpacing))
             }
         default:
-            if let fontWeight {
-                modifier(MainTextModifier(fontWeight: fontWeight))
+            if(fontWeight != nil) {
+                modifier(MainTextModifier(fontWeight: fontWeight!))
             } else {
                 modifier(MainTextModifier())
             }

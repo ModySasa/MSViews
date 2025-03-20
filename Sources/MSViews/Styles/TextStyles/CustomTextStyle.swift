@@ -200,7 +200,7 @@ public extension View {
                 if #available(iOS 16.0, *) {
                     modifier(CustomTitleModifier(textSize: size, lineSpacing: lineSpacing, monoSpacing: monoSpacing , fontWeight: fontWeight))
                 } else {
-                    font(.custom(appFontName, size: size).weight(fontWeight))
+                    font(.custom("Arial", size: size).weight(fontWeight))
                     .lineSpacing(lineSpacing)
                 }
             } else {

@@ -150,7 +150,7 @@ struct CustomTitleModifier : ViewModifier {
                 .kerning(monoSpacing / 100)
         } else {
             content
-//                .font(.custom(getAppFont(fontWeight), size: textSize).weight(fontWeight))
+                .font(.custom(getAppFont(fontWeight), size: textSize).weight(fontWeight))
                 .lineSpacing(lineSpacing)
         }
     }
@@ -197,7 +197,12 @@ public extension View {
             }
         case .custom:
             if let fontWeight {
-                modifier(CustomTitleModifier(textSize: size, lineSpacing: lineSpacing, monoSpacing: monoSpacing , fontWeight: fontWeight))
+                if #available(iOS 16.0, *) {
+                    modifier(CustomTitleModifier(textSize: size, lineSpacing: lineSpacing, monoSpacing: monoSpacing , fontWeight: fontWeight))
+                } else {
+                    font(.custom(getAppFont(fontWeight), size: size).weight(fontWeight))
+                    .lineSpacing(lineSpacing)
+                }
             } else {
                 modifier(CustomTitleModifier(textSize: size, lineSpacing: lineSpacing, monoSpacing: monoSpacing))
             }

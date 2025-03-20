@@ -141,10 +141,11 @@ public struct RangeSlider<Labels:View>: View {
             .gesture(
                 DragGesture()
                     .onChanged { value in
-                        
-                        let partial = (value.location.x * difference / width) - rippleWidth
-                        let newValue = min((partial + initialLower) , upperValue)
-                        lowerValue = Double(max(newValue,initialLower))
+                        let trackWidth = width
+                        let touchX = value.location.x - rippleWidth // Adjust for track offset
+                        let clampedX = max(0, min(touchX, trackWidth))
+                        let newLower = initialLower + (clampedX / trackWidth) * difference
+                        lowerValue = min(newLower, upperValue)
                     }
             )
             .opacity(hasLower ? 1 : 0)
@@ -158,9 +159,11 @@ public struct RangeSlider<Labels:View>: View {
             .gesture(
                 DragGesture()
                     .onChanged { value in
-                        let partial = ((width - value.location.x) * difference / width) + (3.0 * rippleWidth)
-                        let newValue = max((initialUpper - partial) , lowerValue)
-                        upperValue = Double(min(newValue,initialUpper))
+                        let trackWidth = width
+                        let touchX = value.location.x - rippleWidth // Adjust for track offset
+                        let clampedX = max(0, min(touchX, trackWidth))
+                        let newUpper = initialLower + (clampedX / trackWidth) * difference
+                        upperValue = max(newUpper, lowerValue)
                     }
             )
     }

@@ -151,7 +151,7 @@ struct CustomTitleModifier : ViewModifier {
         } else {
             content
                 .font(.custom(getAppFont(fontWeight), size: textSize).weight(fontWeight))
-                .lineSpacing(lineSpacing)
+//                .lineSpacing(lineSpacing)
         }
     }
 }

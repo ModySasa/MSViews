@@ -23,6 +23,7 @@ public struct RangeSlider<Labels:View>: View {
     var labels : Labels
     
     var hasLower : Bool
+    var hasUpper : Bool
     @State var lowerConversion = 1.0
     @State var upperConversion = 1.0
     
@@ -42,6 +43,7 @@ public struct RangeSlider<Labels:View>: View {
         , hasLabel: Bool = true
         , labelPadding: CGFloat = 16
         , hasLower : Bool = true
+        , hasUpper : Bool = true
         , labels: @escaping () -> Labels
     ) {
         self._lowerValue = lowerValue
@@ -55,6 +57,7 @@ public struct RangeSlider<Labels:View>: View {
         self.hasLabel = hasLabel
         self.labelPadding = labelPadding
         self.hasLower = hasLower
+        self.hasUpper = hasUpper
         self.labels = labels()
         self.lowerConversion = self.lowerValue / 100
         self.upperConversion = self.upperValue / 100
@@ -166,6 +169,7 @@ public struct RangeSlider<Labels:View>: View {
                         upperValue = max(newUpper, lowerValue)
                     }
             )
+            .opacity(hasUpper ? 1 : 0)
     }
     
     

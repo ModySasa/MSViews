@@ -198,9 +198,7 @@ public extension View {
             }
         case .custom:
             if(fontWeight != nil) {
-                if #available(iOS 16.0, *) {
-                    modifier(CustomTitleModifier(textSize: size, lineSpacing: lineSpacing, monoSpacing: monoSpacing , fontWeight: fontWeight!))
-                }
+                modifier(CustomTitleModifier(textSize: size, lineSpacing: lineSpacing, monoSpacing: monoSpacing , fontWeight: fontWeight!))
             } else {
                 modifier(CustomTitleModifier(textSize: size, lineSpacing: lineSpacing, monoSpacing: monoSpacing))
             }

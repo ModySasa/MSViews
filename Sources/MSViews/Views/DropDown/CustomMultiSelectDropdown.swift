@@ -20,7 +20,6 @@ public struct CustomMultiSelectDropdown<Label: View>: View {
     public init(
         selectedOptions: Binding<[String]> ,
         options: [String] ,
-        isPopoverPresented: Bool = false ,
         checkBox : CheckBox ,
         saveText: String ,
         label: @escaping (Binding<[String]>) -> Label
@@ -28,7 +27,6 @@ public struct CustomMultiSelectDropdown<Label: View>: View {
         self._selectedOptions = selectedOptions
         self.options = options
         self.label = label
-        self.isPopoverPresented = isPopoverPresented
         self.checkBox = checkBox
         self.saveText = saveText
     }

@@ -16,6 +16,7 @@ public struct RangeSlider<Labels:View>: View {
     var outRangeColor : Color = .orange.opacity(0.4)
     var ribbleStrokeWidth : CGFloat = 1
     var ribbleStrokeColor : Color = .white
+    var ribbleFillColor: Color? = nil
     var lineHeight : CGFloat = 1
     var hasLabel : Bool = true
     var labelPadding : CGFloat = 16
@@ -39,6 +40,7 @@ public struct RangeSlider<Labels:View>: View {
         , outRangeColor: Color = Color.orange.opacity(0.4)
         , ribbleStrokeWidth: CGFloat = 1
         , ribbleStrokeColor: Color = Color.white
+        , ribbleFillColor: Color? = nil
         , lineHeight: CGFloat = 1
         , hasLabel: Bool = true
         , labelPadding: CGFloat = 16
@@ -53,6 +55,7 @@ public struct RangeSlider<Labels:View>: View {
         self.outRangeColor = outRangeColor
         self.ribbleStrokeWidth = ribbleStrokeWidth
         self.ribbleStrokeColor = ribbleStrokeColor
+        self.ribbleFillColor = ribbleFillColor
         self.lineHeight = lineHeight
         self.hasLabel = hasLabel
         self.labelPadding = labelPadding
@@ -93,8 +96,9 @@ public struct RangeSlider<Labels:View>: View {
     var ribble : some View {
         ZStack(alignment: .center) {
             Circle()
+                .fill(ribbleFillColor ?? inRangeColor)
                 .frame(height:rippleWidth)
-                .foregroundColor(inRangeColor)
+                
             
             Circle()
                 .stroke(lineWidth: ribbleStrokeWidth)

@@ -6,7 +6,8 @@
 //
 
 import Foundation
-import UIKit
+import SwiftUI
+//import UIKit
 
 public struct Margins {
     public let mainMarginHorizontal : CGFloat

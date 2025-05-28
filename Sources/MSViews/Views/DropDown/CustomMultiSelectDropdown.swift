@@ -95,13 +95,14 @@ public struct CustomMultiSelectDropdown<Label: View>: View {
                     Divider()
                     Text(
                         saveText
-                    ).onTapGesture {
-                        isPopoverPresented = false
-                    }
+                    )
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(8)
+                    .onTapGesture {
+                        isPopoverPresented = false
+                    }
                 }
                 .padding()
                 .frame(width: 250)

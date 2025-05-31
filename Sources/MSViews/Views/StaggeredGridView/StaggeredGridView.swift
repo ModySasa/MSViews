@@ -114,7 +114,7 @@ public struct StaggeredGridView<Cell:View>: View {
             fontAttributes: [.name : appFontName]), size: textSize)
                                    
         let size = string.size(with: baseFont)
-        return min(size.width + 2 * horizontalPadding, width)
+        return min(size.width, width) + (2 * horizontalPadding)
     }
 
     func catsList(

@@ -11,10 +11,6 @@ public class ToastManager: ObservableObject {
     @Published var currentToast: ToastMessage?
     @Published var showToast: Bool = false
     
-    public init() {
-        
-    }
-    
     public func show(type: CustomToastType, title: String , message: String , duration: Double = 3.0) {
         let toast = ToastMessage(
             type: type,

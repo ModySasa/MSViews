@@ -41,7 +41,7 @@ public struct CustomMultiSelectDropdown<Label: View>: View {
         unCheckedColor: Color,
         checkTextSize: Double,
         checkTextWeight: Font.Weight,
-        label: @escaping (Binding<[String]>) -> Label,
+        label: @escaping (Binding<[String]>) -> Label
     ) {
         self._selectedOptions = selectedOptions
         self.options = options

@@ -33,7 +33,11 @@ func getAppFont(_ fontWeight : Font.Weight)->String {
         print("FONT TEST : ARABIC " , appArabicFontName)
         return appArabicFontName
     } else {
-        if(appFontName == FontNames.gilroy.rawValue || appFontName == FontNames.crimsonText.rawValue) {
+        if(
+            appFontName == FontNames.gilroy.rawValue
+            || appFontName == FontNames.crimsonText.rawValue
+            || appFontName == FontNames.inter.rawValue
+        ) {
             var namee = appFontName
             switch fontWeight {
             case .bold:

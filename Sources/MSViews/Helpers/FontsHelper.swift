@@ -27,6 +27,7 @@ public enum FontNames:String {
     case comme = "Comme"
     case tajawal = "Tajawal"
     case crimsonText = "Crimsontext"
+    case inter = "Inter"
 }
 
 public func setAppFontName(_ name:FontNames){

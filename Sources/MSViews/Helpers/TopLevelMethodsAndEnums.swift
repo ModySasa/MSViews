@@ -60,6 +60,7 @@ func getAppFont(_ fontWeight : Font.Weight)->String {
             default:
                 namee = "\(appFontName)-Regular"
             }
+            print("NAMEEE : " , namee)
             return namee
         } else {
             return appFontName

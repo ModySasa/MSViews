@@ -30,7 +30,6 @@ public func printAppFonts(){
 
 func getAppFont(_ fontWeight : Font.Weight)->String {
     if(msViews.langMethods.isArabic()) {
-        print("NAMEEE : " , "ARABICCCC")
         return appArabicFontName
     } else {
         if(
@@ -61,10 +60,8 @@ func getAppFont(_ fontWeight : Font.Weight)->String {
             default:
                 namee = "\(appFontName)-Regular"
             }
-            print("NAMEEE : " , namee)
             return namee
         } else {
-            print("NAMEEE : " , "ENGLISSSH")
             return appFontName
         }
     }

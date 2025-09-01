@@ -30,7 +30,6 @@ public func printAppFonts(){
 
 func getAppFont(_ fontWeight : Font.Weight)->String {
     if(msViews.langMethods.isArabic()) {
-        print("FONT TEST : ARABIC " , appArabicFontName)
         return appArabicFontName
     } else {
         if(
@@ -56,15 +55,13 @@ func getAppFont(_ fontWeight : Font.Weight)->String {
                 namee = "\(appFontName)-Light"
                 break
             case .semibold:
-                namee = "\(appFontName)-Semibold"
+                namee = appFontName == FontNames.inter.rawValue ? "\(appFontName)-SemiBold" : "\(appFontName)-Semibold"
                 break
             default:
                 namee = "\(appFontName)-Regular"
             }
-            print("FONT TEST : EXCEPTION " , namee)
             return namee
         } else {
-            print("FONT TEST : ENGLISH " , appFontName)
             return appFontName
         }
     }

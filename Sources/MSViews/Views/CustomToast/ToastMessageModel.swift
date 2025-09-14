@@ -9,9 +9,9 @@ import Foundation
 
 
 struct ToastMessage: Equatable {
-    let id = UUID()
-    let type: CustomToastType
-    let title: String
-    let message: String
-    let duration: Double
+    public let id = UUID()
+    public let type: CustomToastType
+    public let title: String
+    public let message: String
+    public let duration: Double
 }

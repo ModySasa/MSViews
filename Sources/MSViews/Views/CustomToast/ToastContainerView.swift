@@ -56,15 +56,15 @@ public struct ToastContainerView<Content: View>: View {
                     let dragThreshold: CGFloat = 50
                     switch toastManager.currentConfiguration.position {
                     case .top:
-                        if value.translation.y < -dragThreshold {
+                        if value.translation.height < -dragThreshold {
                             toastManager.hide()
                         }
                     case .bottom:
-                        if value.translation.y > dragThreshold {
+                        if value.translation.height > dragThreshold {
                             toastManager.hide()
                         }
                     case .middle:
-                        if abs(value.translation.x) > dragThreshold || abs(value.translation.y) > dragThreshold {
+                        if abs(value.translation.width) > dragThreshold || abs(value.translation.height) > dragThreshold {
                             toastManager.hide()
                         }
                     }

@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct ToastMessage: Equatable {
+public struct ToastMessage: Equatable {
     public let id = UUID()
     public let type: CustomToastType
     public let title: String

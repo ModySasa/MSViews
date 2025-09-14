@@ -14,7 +14,7 @@ public enum CustomToastType {
     case info
     
     
-    var themeColor: Color {
+    public var themeColor: Color {
         switch self {
         case .success:
             return Color.green
@@ -27,7 +27,7 @@ public enum CustomToastType {
         }
     }
     
-    var icon: String {
+    public var icon: String {
         switch self {
         case .success:
             return "checkmark.circle.fill"

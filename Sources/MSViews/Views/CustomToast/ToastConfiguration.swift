@@ -5,7 +5,7 @@
 //  Created by systemira mobile on 14/09/2025.
 //
 
-
+import SwiftUI
 public struct ToastConfiguration {
     public let iconSize: CGFloat
     public let iconColor: Color

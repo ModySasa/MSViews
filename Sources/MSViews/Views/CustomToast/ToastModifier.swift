@@ -52,7 +52,7 @@ public struct ToastModifier: ViewModifier {
             }
         }
         
-        private func resolveConfiguration(for type: ToastType) -> ToastConfiguration {
+    private func resolveConfiguration(for type: CustomToastType) -> ToastConfiguration {
             // If a custom configuration is provided, use it with the appropriate background color
             var config = configuration
             

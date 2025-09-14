@@ -7,6 +7,7 @@
 
 import SwiftUI
 public struct ToastConfiguration {
+    public let position: ToastPosition
     public let iconSize: CGFloat
     public let iconColor: Color
     public let titleFont: Font
@@ -25,8 +26,10 @@ public struct ToastConfiguration {
     public let closeButtonColor: Color
     public let messageLineLimit: Int?
     public let height: CGFloat?
+    public let showCloseButton: Bool
     
     public init(
+        position: ToastPosition = .bottom,
         iconSize: CGFloat = 24,
         iconColor: Color = .white,
         titleFont: Font = .headline,
@@ -44,8 +47,10 @@ public struct ToastConfiguration {
         closeButtonSize: CGFloat = 16,
         closeButtonColor: Color = .white.opacity(0.8),
         messageLineLimit: Int? = 2,
-        height: CGFloat? = nil
+        height: CGFloat? = nil,
+        showCloseButton: Bool = true
     ) {
+        self.position = position
         self.iconSize = iconSize
         self.iconColor = iconColor
         self.titleFont = titleFont
@@ -64,6 +69,7 @@ public struct ToastConfiguration {
         self.closeButtonColor = closeButtonColor
         self.messageLineLimit = messageLineLimit
         self.height = height
+        self.showCloseButton = showCloseButton
     }
 }
 

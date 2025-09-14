@@ -42,12 +42,14 @@ public struct CustomToastView: View {
                 
                 Spacer()
                 
-                Button {
-                    onDismiss()
-                } label: {
-                    Image(systemName: "xmark")
-                        .font(.system(size: configuration.closeButtonSize, weight: .bold))
-                        .foregroundStyle(configuration.closeButtonColor)
+                if configuration.showCloseButton {
+                    Button {
+                        onDismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                            .font(.system(size: configuration.closeButtonSize, weight: .bold))
+                            .foregroundStyle(configuration.closeButtonColor)
+                    }
                 }
             }
             .padding(.horizontal, configuration.horizontalPadding)
@@ -55,7 +57,7 @@ public struct CustomToastView: View {
             .frame(height: configuration.height)
             .background(
                 RoundedRectangle(cornerRadius: configuration.cornerRadius)
-                    .fill(configuration.backgroundColor)
+                    .fill(resolveBackgroundColor())
                     .shadow(
                         color: configuration.shadowColor,
                         radius: configuration.shadowRadius,
@@ -64,6 +66,11 @@ public struct CustomToastView: View {
                     )
             )
             .padding(.horizontal, 16)
+        }
+    
+    private func resolveBackgroundColor() -> Color {
+            // Always use the toast type's theme color for consistency
+            return toast.type.themeColor
         }
     }
 

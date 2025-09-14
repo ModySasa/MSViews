@@ -4,7 +4,7 @@
 //
 //  Created by systemira mobile on 14/09/2025.
 //
-
+import SwiftUI
 
 public struct ToastContainerView<Content: View>: View {
     let content: Content
@@ -90,7 +90,7 @@ extension View {
 }
 
 // MARK: - Global Toast Functions (Uses App Configuration)
-public struct Toast {
+public struct ToastCustom {
     /// Show success toast using app configuration
     public static func success(_ title: String, message: String = "", duration: Double = 3.0) {
         ToastManager.shared.show(type: .success, title: title, message: message, duration: duration)

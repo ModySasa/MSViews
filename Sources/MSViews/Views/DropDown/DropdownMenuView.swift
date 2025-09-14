@@ -11,15 +11,18 @@ public struct DropdownMenuView<Label:View>: View {
     @Binding var selectedOption: String
     var options: [String]
     var label : (Binding<String>)->Label
+    var onSelect: ((String)->Void)?
     
     public init(
         selectedOption : Binding<String>,
         options:[String],
-        label : @escaping (Binding<String>)->Label
+        label : @escaping (Binding<String>)->Label,
+        onSelect: ((String)->Void)? = nil
     ) {
         self.options = options
         self._selectedOption = selectedOption
         self.label = label
+        self.onSelect = onSelect
     }
     
     public var body: some View {
@@ -28,6 +31,9 @@ public struct DropdownMenuView<Label:View>: View {
                 ForEach(options, id: \.self) { option in
                     Button(action: {
                         selectedOption = option
+                        if let onSelect = onSelect {
+                            onSelect(selectedOption)
+                        }
                     }) {
                         Text(LocalizedStringKey(option))
                     }

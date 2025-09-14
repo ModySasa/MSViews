@@ -12,15 +12,15 @@ public struct CustomToastView: View {
     let configuration: ToastConfiguration
     let onDismiss: () -> Void
     
-    public init(
-        toast: ToastMessage,
-        configuration: ToastConfiguration = .default,
-        onDismiss: @escaping () -> Void = {}
-    ) {
-        self.toast = toast
-        self.configuration = configuration
-        self.onDismiss = onDismiss
-    }
+//    public init(
+//        toast: ToastMessage,
+//        configuration: ToastConfiguration = .default,
+//        onDismiss: @escaping () -> Void = {}
+//    ) {
+//        self.toast = toast
+//        self.configuration = configuration
+//        self.onDismiss = onDismiss
+//    }
     
     public var body: some View {
             HStack(alignment: .center, spacing: configuration.spacing) {

@@ -24,7 +24,7 @@ public struct CustomToastView: View {
     
     public var body: some View {
             HStack(alignment: .center, spacing: configuration.spacing) {
-                Image(systemName: toast.type.icon)
+                Image(configuration.icon(for: toast.type))
                     .font(.system(size: configuration.iconSize))
                     .foregroundStyle(configuration.iconColor)
                     .frame(width: configuration.iconSize + 6, height: configuration.iconSize + 6)
@@ -46,7 +46,7 @@ public struct CustomToastView: View {
                     Button {
                         onDismiss()
                     } label: {
-                        Image(systemName: "xmark")
+                        Image(configuration.closeButtonIcon)
                             .font(.system(size: configuration.closeButtonSize, weight: .bold))
                             .foregroundStyle(configuration.closeButtonColor)
                     }
@@ -57,9 +57,9 @@ public struct CustomToastView: View {
             .frame(height: configuration.height)
             .background(
                 RoundedRectangle(cornerRadius: configuration.cornerRadius)
-                    .fill(resolveBackgroundColor())
+                    .fill(configuration.color(for: toast.type))
                     .shadow(
-                        color: configuration.shadowColor,
+                        color: configuration.color(for: toast.type).opacity(0.4),
                         radius: configuration.shadowRadius,
                         x: configuration.shadowOffset.width,
                         y: configuration.shadowOffset.height

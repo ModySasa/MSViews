@@ -14,29 +14,29 @@ public enum CustomToastType {
     case info
     
     
-    public var themeColor: Color {
-        switch self {
-        case .success:
-            return Color.green
-        case .error:
-            return Color.red
-        case .warning:
-            return Color.orange
-        case .info:
-            return Color.blue
-        }
-    }
-    
-    public var icon: String {
-        switch self {
-        case .success:
-            return "checkmark.circle.fill"
-        case .error:
-            return "exclamationmark.triangle.fill"
-        case .warning:
-            return "exclamationmark.circle.fill"
-        case .info:
-            return "info.circle.fill"
-        }
-    }
+//    public var themeColor: Color {
+//        switch self {
+//        case .success:
+//            return Color.green
+//        case .error:
+//            return Color.red
+//        case .warning:
+//            return Color.orange
+//        case .info:
+//            return Color.blue
+//        }
+//    }
+//    
+//    public var icon: String {
+//        switch self {
+//        case .success:
+//            return "checkmark.circle.fill"
+//        case .error:
+//            return "exclamationmark.triangle.fill"
+//        case .warning:
+//            return "exclamationmark.circle.fill"
+//        case .info:
+//            return "info.circle.fill"
+//        }
+//    }
 }

@@ -28,6 +28,17 @@ public struct ToastConfiguration {
     public let height: CGFloat?
     public let showCloseButton: Bool
     
+    // Custom colors and icons for each toast type
+    public let successColor: Color
+    public let successIcon: ImageResource
+    public let errorColor: Color
+    public let errorIcon: ImageResource
+    public let warningColor: Color
+    public let warningIcon: ImageResource
+    public let infoColor: Color
+    public let infoIcon: ImageResource
+    public let closeButtonIcon: ImageResource
+    
     public init(
         position: ToastPosition = .bottom,
         iconSize: CGFloat = 24,
@@ -48,7 +59,17 @@ public struct ToastConfiguration {
         closeButtonColor: Color = .white.opacity(0.8),
         messageLineLimit: Int? = 2,
         height: CGFloat? = nil,
-        showCloseButton: Bool = true
+        showCloseButton: Bool = true,
+        // Custom theme properties
+        successColor: Color = .green,
+        successIcon: ImageResource = .checkmarkCircleFill,
+        errorColor: Color = .red,
+        errorIcon: ImageResource = .exclamationmarkTriangleFill,
+        warningColor: Color = .orange,
+        warningIcon: ImageResource = .exclamationmarkCircleFill,
+        infoColor: Color = .blue,
+        infoIcon: ImageResource = .infoCircleFill,
+        closeButtonIcon: ImageResource = .xmark
     ) {
         self.position = position
         self.iconSize = iconSize
@@ -70,6 +91,33 @@ public struct ToastConfiguration {
         self.messageLineLimit = messageLineLimit
         self.height = height
         self.showCloseButton = showCloseButton
+        self.successColor = successColor
+        self.successIcon = successIcon
+        self.errorColor = errorColor
+        self.errorIcon = errorIcon
+        self.warningColor = warningColor
+        self.warningIcon = warningIcon
+        self.infoColor = infoColor
+        self.infoIcon = infoIcon
+        self.closeButtonIcon = closeButtonIcon
+    }
+    
+    public func color(for type: CustomToastType) -> Color {
+        switch type {
+        case .success: return successColor
+        case .error: return errorColor
+        case .warning: return warningColor
+        case .info: return infoColor
+        }
+    }
+    
+    public func icon(for type: CustomToastType) -> String {
+        switch type {
+        case .success: return successIcon
+        case .error: return errorIcon
+        case .warning: return warningIcon
+        case .info: return infoIcon
+        }
     }
 }
 

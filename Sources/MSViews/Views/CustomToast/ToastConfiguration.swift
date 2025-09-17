@@ -12,10 +12,16 @@ public struct ToastConfiguration {
     public let iconColor: Color
     public let titleSize : CGFloat
     public let titleWeight : Font.Weight
-    public let titleColor: Color
+    public let titleSuccessColor: Color
+    public let titleInfoColor: Color
+    public let titleWarningColor: Color
+    public let titleErrorColor: Color
     public let messageSize : CGFloat
     public let messageWeight : Font.Weight
-    public let messageColor: Color
+    public let messageSuccessColor: Color
+    public let messageInfoColor: Color
+    public let messageWarningColor: Color
+    public let messageErrorColor: Color
     public let backgroundColor: Color
     public let cornerRadius: CGFloat
     public let horizontalPadding: CGFloat
@@ -47,10 +53,16 @@ public struct ToastConfiguration {
         iconColor: Color = .white,
         titleSize: CGFloat = 16,
         titleWeight: Font.Weight = .regular,
-        titleColor: Color = .white,
+        titleSuccessColor: Color = .white,
+        titleInfoColor: Color = .white,
+        titleWarningColor: Color = .white,
+        titleErrorColor: Color = .white,
         messageSize: CGFloat = 14,
         messageWeight: Font.Weight = .regular,
-        messageColor: Color = .white.opacity(0.8),
+        messageSuccessColor: Color = .white.opacity(0.8),
+        messageInfoColor: Color = .white.opacity(0.8),
+        messageWarningColor: Color = .white.opacity(0.8),
+        messageErrorColor: Color = .white.opacity(0.8),
         backgroundColor: Color = .blue,
         cornerRadius: CGFloat = 12,
         horizontalPadding: CGFloat = 16,
@@ -80,10 +92,16 @@ public struct ToastConfiguration {
         self.iconColor = iconColor
         self.titleSize = titleSize
         self.titleWeight = titleWeight
-        self.titleColor = titleColor
+        self.titleSuccessColor = titleSuccessColor
+        self.titleInfoColor = titleInfoColor
+        self.titleWarningColor = titleWarningColor
+        self.titleErrorColor = titleErrorColor
         self.messageSize = messageSize
         self.messageWeight = messageWeight
-        self.messageColor = messageColor
+        self.messageSuccessColor = messageSuccessColor
+        self.messageInfoColor = messageInfoColor
+        self.messageWarningColor = messageWarningColor
+        self.messageErrorColor = messageErrorColor
         self.backgroundColor = backgroundColor
         self.cornerRadius = cornerRadius
         self.horizontalPadding = horizontalPadding
@@ -114,6 +132,24 @@ public struct ToastConfiguration {
         case .error: return errorColor
         case .warning: return warningColor
         case .info: return infoColor
+        }
+    }
+    
+    public func titleColor(for type: CustomToastType) -> Color {
+        switch type {
+        case .success: return titleSuccessColor
+        case .error: return titleErrorColor
+        case .warning: return titleErrorColor
+        case .info: return titleInfoColor
+        }
+    }
+    
+    public func messageColor(for type: CustomToastType) -> Color {
+        switch type {
+        case .success: return messageSuccessColor
+        case .error: return messageErrorColor
+        case .warning: return messageWarningColor
+        case .info: return messageInfoColor
         }
     }
     

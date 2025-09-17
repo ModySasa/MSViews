@@ -47,7 +47,7 @@ public struct ToastConfiguration {
         iconColor: Color = .white,
         titleSize: CGFloat = 16,
         titleWeight: Font.Weight = .regular,
-        titleColor: Font = .subheadline,
+        titleColor: Color = .white,
         messageSize: CGFloat = 14,
         messageWeight: Font.Weight = .regular,
         messageColor: Color = .white.opacity(0.8),
@@ -157,8 +157,8 @@ public extension ToastConfiguration {
     
     static let compact = ToastConfiguration(
         iconSize: 20,
-        titleFont: .caption,
-        messageFont: .caption2,
+        titleSize: 16,
+        messageSize: 14,
         horizontalPadding: 12,
         verticalPadding: 8,
         spacing: 8,
@@ -167,8 +167,8 @@ public extension ToastConfiguration {
     
     static let large = ToastConfiguration(
         iconSize: 32,
-        titleFont: .title2,
-        messageFont: .body,
+        titleSize: 18,
+        messageSize: 16,
         horizontalPadding: 20,
         verticalPadding: 16,
         spacing: 16,

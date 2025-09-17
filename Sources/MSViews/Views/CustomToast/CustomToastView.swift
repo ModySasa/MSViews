@@ -68,10 +68,6 @@ public struct CustomToastView: View {
             .padding(.horizontal, 16)
         }
     
-    private func resolveBackgroundColor() -> Color {
-            // Always use the toast type's theme color for consistency
-            return toast.type.themeColor
-        }
     }
 
 #Preview {

@@ -10,9 +10,11 @@ public struct ToastConfiguration {
     public let position: ToastPosition
     public let iconSize: CGFloat
     public let iconColor: Color
-    public let titleFont: Font
+    public let titleSize : CGFloat
+    public let titleWeight : Font.Weight
     public let titleColor: Color
-    public let messageFont: Font
+    public let messageSize : CGFloat
+    public let messageWeight : Font.Weight
     public let messageColor: Color
     public let backgroundColor: Color
     public let cornerRadius: CGFloat
@@ -43,9 +45,11 @@ public struct ToastConfiguration {
         position: ToastPosition = .bottom,
         iconSize: CGFloat = 24,
         iconColor: Color = .white,
-        titleFont: Font = .headline,
-        titleColor: Color = .white,
-        messageFont: Font = .subheadline,
+        titleSize: CGFloat = 16,
+        titleWeight: Font.Weight = .regular,
+        titleColor: Font = .subheadline,
+        messageSize: CGFloat = 14,
+        messageWeight: Font.Weight = .regular,
         messageColor: Color = .white.opacity(0.8),
         backgroundColor: Color = .blue,
         cornerRadius: CGFloat = 12,
@@ -74,9 +78,11 @@ public struct ToastConfiguration {
         self.position = position
         self.iconSize = iconSize
         self.iconColor = iconColor
-        self.titleFont = titleFont
+        self.titleSize = titleSize
+        self.titleWeight = titleWeight
         self.titleColor = titleColor
-        self.messageFont = messageFont
+        self.messageSize = messageSize
+        self.messageWeight = messageWeight
         self.messageColor = messageColor
         self.backgroundColor = backgroundColor
         self.cornerRadius = cornerRadius

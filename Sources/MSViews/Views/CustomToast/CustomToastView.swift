@@ -31,11 +31,11 @@ public struct CustomToastView: View {
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(toast.title)
-                        .font(configuration.titleFont)
+                        .font(.custom(getAppFont(configuration.titleWeight), size: configuration.titleSize).weight(configuration.titleWeight))
                         .foregroundColor(configuration.titleColor)
                     
                     Text(toast.message)
-                        .font(configuration.messageFont)
+                        .font(.custom(getAppFont(configuration.messageWeight), size: configuration.messageSize).weight(configuration.messageWeight))
                         .foregroundColor(configuration.messageColor)
                         .lineLimit(configuration.messageLineLimit)
                 }

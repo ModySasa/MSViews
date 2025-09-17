@@ -30,14 +30,14 @@ public struct ToastConfiguration {
     
     // Custom colors and icons for each toast type
     public let successColor: Color
-    public let successIcon: ImageResource
+    public let successIcon: String
     public let errorColor: Color
-    public let errorIcon: ImageResource
+    public let errorIcon: String
     public let warningColor: Color
-    public let warningIcon: ImageResource
+    public let warningIcon: String
     public let infoColor: Color
-    public let infoIcon: ImageResource
-    public let closeButtonIcon: ImageResource
+    public let infoIcon: String
+    public let closeButtonIcon: String
     
     public init(
         position: ToastPosition = .bottom,
@@ -62,14 +62,14 @@ public struct ToastConfiguration {
         showCloseButton: Bool = true,
         // Custom theme properties
         successColor: Color = .green,
-        successIcon: ImageResource = .checkmarkCircleFill,
+        successIcon: String = "checkmark.circle.fill",
         errorColor: Color = .red,
-        errorIcon: ImageResource = .exclamationmarkTriangleFill,
+        errorIcon: String = "exclamationmark.triangle.fill",
         warningColor: Color = .orange,
-        warningIcon: ImageResource = .exclamationmarkCircleFill,
+        warningIcon: String = "exclamationmark.circle.fill",
         infoColor: Color = .blue,
-        infoIcon: ImageResource = .infoCircleFill,
-        closeButtonIcon: ImageResource = .xmark
+        infoIcon: String = "info.circle.fill",
+        closeButtonIcon: String = "xmark"
     ) {
         self.position = position
         self.iconSize = iconSize

@@ -36,6 +36,7 @@ func getAppFont(_ fontWeight : Font.Weight)->String {
             appFontName == FontNames.gilroy.rawValue
             || appFontName == FontNames.crimsonText.rawValue
             || appFontName == FontNames.inter.rawValue
+            || appFontName == FontNames.ruda.rawValue
         ) {
             var namee = appFontName
             switch fontWeight {

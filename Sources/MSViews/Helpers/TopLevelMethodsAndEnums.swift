@@ -29,7 +29,7 @@ public func printAppFonts(){
 }
 
 func getAppFont(_ fontWeight : Font.Weight)->String {
-    if(msViews.langMethods.isArabic()) {
+    if MSLanguage.isArabic {
         return appArabicFontName
     } else {
         if(
@@ -94,4 +94,18 @@ public func no()->Bool {
 public enum SearchType : String {
     case asc = "ASC"
     case desc = "DESC"
+}
+
+
+public enum MSLanguage {
+    public static var isArabicOverride: (() -> Bool)?
+    
+    public static func isArabicFallback() -> Bool {
+        
+        return msViews.langMethods.isArabic()
+    }
+
+    public static var isArabic: Bool {
+        isArabicOverride?() ?? isArabicFallback()
+    }
 }

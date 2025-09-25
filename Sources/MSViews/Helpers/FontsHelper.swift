@@ -28,6 +28,7 @@ public enum FontNames:String {
     case tajawal = "Tajawal"
     case crimsonText = "Crimsontext"
     case inter = "Inter28pt"
+    case ruda = "Ruda"
 }
 
 public func setAppFontName(_ name:FontNames){

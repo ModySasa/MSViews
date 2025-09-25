@@ -150,28 +150,45 @@ public class Intents {
         }
     }
 
-    public func openMapsApps(lat:Double , lng : Double , toGoogleMaps:Bool = true , showDirections: Bool = false , label:String? = nil) {
-        let googleMapsURL = URL(string: "comgooglemaps://?daddr=\(lat),\(lng)&directionsmode=driving&center=\(lat),\(lng)&zoom=14&q=\(lat),\(lng)")!
-        let appleMapsURL = URL(string: "http://maps.apple.com/?daddr=\(lat),\(lng)&dirflg=d")!
+    public func openMapsApps(
+        lat: Double,
+        lng: Double,
+        toGoogleMaps: Bool = true,
+        showDirections: Bool = false,
+        label: String? = nil
+    ) {
         
-        if(toGoogleMaps) {
-            if UIApplication.shared.canOpenURL(googleMapsURL) {
-                // Open Google Maps
-                UIApplication.shared.open(googleMapsURL, options: [:], completionHandler: nil)
-            } else {
-                if(!showDirections) {
-                    openMaps(lat: lat, lng: lng , label: label)
-                } else {
-                    // Open Apple Maps
-                    UIApplication.shared.open(appleMapsURL, options: [:], completionHandler: nil)
-                }
-            }
+        // Google Maps
+        let googleMapsURLString: String
+        if showDirections {
+            googleMapsURLString = "comgooglemaps://?saddr=&daddr=\(lat),\(lng)&directionsmode=driving"
         } else {
-            if (!showDirections) {
-                openMaps(lat: lat, lng: lng , label: label)
+            googleMapsURLString = "comgooglemaps://?q=\(lat),\(lng)"
+        }
+        let googleMapsURL = URL(string: googleMapsURLString)!
+        
+        // Apple Maps
+        let appleMapsURLString: String
+        if showDirections {
+            appleMapsURLString = "http://maps.apple.com/?saddr=Current+Location&daddr=\(lat),\(lng)"
+        } else {
+            if let label = label, !label.isEmpty {
+                appleMapsURLString = "http://maps.apple.com/?ll=\(lat),\(lng)&q=\(label.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
+            } else {
+                appleMapsURLString = "http://maps.apple.com/?ll=\(lat),\(lng)"
+            }
+        }
+        let appleMapsURL = URL(string: appleMapsURLString)!
+        
+        // Open App
+        if toGoogleMaps {
+            if UIApplication.shared.canOpenURL(googleMapsURL) {
+                UIApplication.shared.open(googleMapsURL, options: [:], completionHandler: nil)
             } else {
                 UIApplication.shared.open(appleMapsURL, options: [:], completionHandler: nil)
             }
+        } else {
+            UIApplication.shared.open(appleMapsURL, options: [:], completionHandler: nil)
         }
     }
     

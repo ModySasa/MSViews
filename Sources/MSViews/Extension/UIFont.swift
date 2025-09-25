@@ -23,7 +23,7 @@ public extension UIFont {
         
         traits[.weight] = weight
         
-        attributes[.name] = msViews.langMethods.isArabic() ? appArabicFontName : appFontName
+        attributes[.name] = MSLanguage.isArabic ? appArabicFontName : appFontName
         attributes[.traits] = traits
         attributes[.family] = familyName
         //        print("fontWeight \(weight)")

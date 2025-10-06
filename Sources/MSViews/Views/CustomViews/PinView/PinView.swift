@@ -190,7 +190,7 @@ public struct PinView: View {
                 Spacer()
             }
         }
-        .frame(maxWidth:.infinity)
+//        .frame(maxWidth:.infinity)
         .onChange(of: b1) { newValue in
             checkData(/*st: &b1 , */i: 0)
         }

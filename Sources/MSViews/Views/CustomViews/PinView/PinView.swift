@@ -182,7 +182,7 @@ public struct PinView: View {
 //                            .background(
 //                                getTextStyleView()
 //                            )
-                            .frame(alignment: .center)
+//                            .frame(alignment: .center)
                             .keyboardType(.numberPad)
                             .focused($focused, equals: getFocused(i))
                     }

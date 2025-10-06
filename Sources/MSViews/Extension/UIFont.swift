@@ -22,7 +22,6 @@ public extension UIFont {
         var traits = (attributes[.traits] as? [UIFontDescriptor.TraitKey: Any]) ?? [:]
         
         traits[.weight] = weight
-        
         attributes[.name] = MSLanguage.isArabic ? appArabicFontName : appFontName
         attributes[.traits] = traits
         attributes[.family] = familyName

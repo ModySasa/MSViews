@@ -170,8 +170,8 @@ public struct PinView: View {
     
     public var body: some View {
         HStack(spacing:spacing){
+            Spacer()
             ForEach(0..<pinsCount) { i in
-                Spacer()
                 getTextStyleView()
                     .overlay(alignment: .center) {
                         TextField("",text: bs[i])
@@ -186,9 +186,8 @@ public struct PinView: View {
                             .keyboardType(.numberPad)
                             .focused($focused, equals: getFocused(i))
                     }
-                    
-                Spacer()
             }
+            Spacer()
         }
         .frame(maxWidth:.infinity)
         .onChange(of: b1) { newValue in

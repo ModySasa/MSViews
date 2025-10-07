@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Corptia 02 on 16/08/2022.
 //
@@ -41,14 +41,36 @@ public class TimeMethods {
         return dateFormatterGet.string(from: date)
     }
     
-    public func getDateFormated(_ stringDate : String , inFormante: String = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ" , outFormate: String = "dd MMMM yyyy" , locale: String = "") -> String {
+    public func getDateFormated(_ stringDate : String , inFormante: String? = nil , outFormate: String = "dd MMMM yyyy" , locale: String = "") -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = inFormante
-        let date = formatter.date(from: stringDate)
-        formatter.dateFormat = outFormate
-        if !locale.isEmpty{
+        if !locale.isEmpty {
             formatter.locale = Locale(identifier: locale)
         }
+        
+        let possibleFormats = [
+            inFormante,
+            "yyyy-MM-dd",
+            "yyyy-MM-dd HH:mm:ss",
+            "yyyy-MM-dd'T'HH:mm:ss",
+            "yyyy-MM-dd'T'HH:mm:ssZ",
+            "yyyy-MM-dd'T'HH:mm:ss.SSSZ",
+            "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
+        ].compactMap { $0 }
+        
+        var date: Date? = nil
+        for format in possibleFormats {
+            formatter.dateFormat = format
+            if let parsedDate = formatter.date(from: stringDate) {
+                date = parsedDate
+                break
+            }
+        }
+        
+        if date == nil {
+            print("⚠️ Date parsing failed for:", stringDate)
+        }
+        
+        formatter.dateFormat = outFormate
         return formatter.string(from: date ?? Date())
     }
     
@@ -102,13 +124,13 @@ public class TimeMethods {
     public func startCountDown(time:Int , interval:Double = 1.0 , onDone:@escaping (Int)->Void ){
         var countDownTime = time
         Timer.scheduledTimer(withTimeInterval: interval, repeats: true, block: { timer in
-                if(countDownTime > 0){
-                    countDownTime -= 1
-                    onDone(countDownTime)
-                } else if(countDownTime == 0) {
-                    timer.invalidate()
-                }
+            if(countDownTime > 0){
+                countDownTime -= 1
+                onDone(countDownTime)
+            } else if(countDownTime == 0) {
+                timer.invalidate()
             }
+        }
         )
     }
     

@@ -12,8 +12,9 @@ public struct DynamicTextEditorHeightView: View {
     @Binding var text: String
     @State private var textHeight: CGFloat = 38
     @State private var textWidth: CGFloat = 38
-    @State private var fontSize: CGFloat = 38
-    @State private var fontWeight: Font.Weight = .medium
+    
+    private let fontSize: CGFloat
+    private let fontWeight: Font.Weight
 
     public init (
         text: Binding<String>,
@@ -30,6 +31,7 @@ public struct DynamicTextEditorHeightView: View {
             VStack {
                 TextEditor(text: $text)
                     .onChange(of: text) { _ in
+                        print("FONT WEIGHT < " , fontWeight)
                         if let font = UIFont(name: getAppFont(fontWeight), size: fontSize) {
                             textWidth = geometry.size.width // match your .padding(4)
                             textHeight = text.heightForTextEditor(width: textWidth, font: font)

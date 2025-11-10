@@ -33,6 +33,8 @@ public struct DynamicTextEditorHeightView: View {
                         if let font = UIFont(name: getAppFont(fontWeight), size: fontSize) {
                             textWidth = geometry.size.width // match your .padding(4)
                             textHeight = text.heightForTextEditor(width: textWidth, font: font)
+                        } else {
+                            print("THERE IS NO FONT FROM THIS NAME")
                         }
                     }
             }

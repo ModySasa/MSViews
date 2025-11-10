@@ -28,26 +28,17 @@ public struct DynamicTextEditorHeightView: View {
     
     public var body: some View {
         GeometryReader { geometry in
-            VStack {
-                TextEditor(text: $text)
-                    .onChange(of: text) { _ in
-                        print("FONT WEIGHT < " , fontWeight)
-                        if let font = UIFont(name: getAppFont(fontWeight), size: fontSize) {
-                            textWidth = geometry.size.width // match your .padding(4)
-                            textHeight = text.heightForTextEditor(width: textWidth, font: font)
-                        } else {
-                            print("THERE IS NO FONT FROM THIS NAME")
-                        }
+            TextEditor(text: $text)
+                .onChange(of: text) { _ in
+                    if let font = UIFont(name: getAppFont(fontWeight), size: fontSize) {
+                        textWidth = geometry.size.width // match your .padding(4)
+                        textHeight = text.heightForTextEditor(width: textWidth, font: font)
+                    } else {
+                        print("THERE IS NO FONT FROM THIS NAME")
                     }
-            }
+                }
         }
         .frame(height: textHeight)
-        .onAppear {
-            print("textWidth: \(textWidth) , font : \(getAppFont(fontWeight))")
-        }
-        .onChange(of: textHeight) { newValue in
-            print(newValue)
-        }
     }
 }
 

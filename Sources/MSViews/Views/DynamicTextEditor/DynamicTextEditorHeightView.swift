@@ -11,6 +11,7 @@ import SwiftUI
 public struct DynamicTextEditorHeightView: View {
     @Binding var text: String
     @State private var textHeight: CGFloat = 38
+    @State private var textWidth: CGFloat = 38
     @State private var fontSize: CGFloat = 38
     @State private var fontWeight: Font.Weight = .medium
 
@@ -25,18 +26,24 @@ public struct DynamicTextEditorHeightView: View {
     }
     
     public var body: some View {
-        GeometryReader { geometry in
-            VStack {
-                TextEditor(text: $text)
-                    .onChange(of: text) { _ in
-                        if let font = UIFont(name: getAppFont(fontWeight), size: fontSize) {
-                            let width = geometry.size.width // match your .padding(4)
-                            textHeight = text.heightForTextEditor(width: width, font: font)
+        ZStack{
+            GeometryReader { geometry in
+                VStack {
+                    TextEditor(text: $text)
+                        .onChange(of: text) { _ in
+                            if let font = UIFont(name: getAppFont(fontWeight), size: fontSize) {
+                                textWidth = geometry.size.width // match your .padding(4)
+                                textHeight = text.heightForTextEditor(width: textWidth, font: font)
+                            }
                         }
-                    }
+                }
             }
+            .frame(height: textHeight)
+            Text("textHeight: \(textHeight)")
+                .onAppear {
+                    print("textWidth: \(textWidth)")
+                }
         }
-        .frame(height: textHeight)
     }
 }
 

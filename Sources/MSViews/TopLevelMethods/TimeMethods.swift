@@ -74,11 +74,16 @@ public class TimeMethods {
         return formatter.string(from: date ?? Date())
     }
     
-    public func getTimeDiff(time:String) -> String {
+    public func getTimeDiff(
+        time:String ,
+        inputFormat : String = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ",
+        isSince : Bool = true
+    ) -> String {
         var since : String = strings("Since")
+        let ago : String = strings("Ago")
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
+        formatter.dateFormat = inputFormat
         //    yyyy-MM-dd HH:mm:ss"
         if(formatter.date(from: time) != nil ){
             let date1 = formatter.date(from: time)!
@@ -98,21 +103,21 @@ public class TimeMethods {
                             let minutes = floor((elapsedTime - (hours * 60 * 60)) / 60)
                             if(minutes < 1){
                                 let seconds = elapsedTime
-                                since = "\(since) \(Int(seconds)) \(strings("Second"))"
+                                since = "\(isSince ? since : "") \(Int(seconds)) \(strings("Second")) \(isSince ? "" : ago)"
                             } else {
-                                since = "\(since) \(Int(minutes)) \(strings("minute"))"
+                                since = "\(isSince ? since : "")  \(Int(minutes)) \(strings("minute")) \(isSince ? "" : ago)"
                             }
                         } else {
-                            since = "\(since) \(Int(hours)) \(strings("Hour"))"
+                            since = "\(isSince ? since : "")  \(Int(hours)) \(strings("Hour")) \(isSince ? "" : ago)"
                         }
                     } else {
-                        since = "\(since) \(Int(days)) \(strings("Day"))"
+                        since = "\(isSince ? since : "")  \(Int(days)) \(strings("Day")) \(isSince ? "" : ago)"
                     }
                 } else {
-                    since = "\(since) \(Int(months)) \(strings("Month"))"
+                    since = "\(isSince ? since : "")  \(Int(months)) \(strings("Month")) \(isSince ? "" : ago)"
                 }
             } else {
-                since = "\(since) \(Int(years)) \(strings("Year"))"
+                since = "\(isSince ? since : "")  \(Int(years)) \(strings("Year")) \(isSince ? "" : ago)"
             }
             return since
         } else {

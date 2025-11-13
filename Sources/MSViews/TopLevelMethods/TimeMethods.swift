@@ -103,21 +103,21 @@ public class TimeMethods {
                             let minutes = floor((elapsedTime - (hours * 60 * 60)) / 60)
                             if(minutes < 1){
                                 let seconds = elapsedTime
-                                since = "\(isSince ? since : "") \(Int(seconds)) \(strings("Second")) \(isSince ? "" : ago)"
+                                since = "\(isSince ? "\(since) " : "")\(Int(seconds)) \(strings("Second"))\(isSince ? "" : " \(ago)")"
                             } else {
-                                since = "\(isSince ? since : "")  \(Int(minutes)) \(strings("minute")) \(isSince ? "" : ago)"
+                                since = "\(isSince ? "\(since) " : "")\(Int(minutes)) \(strings("minute"))\(isSince ? "" : " \(ago)")"
                             }
                         } else {
-                            since = "\(isSince ? since : "")  \(Int(hours)) \(strings("Hour")) \(isSince ? "" : ago)"
+                            since = "\(isSince ? "\(since) " : "")\(Int(hours)) \(strings("Hour"))\(isSince ? "" : " \(ago)")"
                         }
                     } else {
-                        since = "\(isSince ? since : "")  \(Int(days)) \(strings("Day")) \(isSince ? "" : ago)"
+                        since = "\(isSince ? "\(since) " : "")\(Int(days)) \(strings("Day"))\(isSince ? "" : " \(ago)")"
                     }
                 } else {
-                    since = "\(isSince ? since : "")  \(Int(months)) \(strings("Month")) \(isSince ? "" : ago)"
+                    since = "\(isSince ? "\(since) " : "")\(Int(months)) \(strings("Month"))\(isSince ? "" : " \(ago)")"
                 }
             } else {
-                since = "\(isSince ? since : "")  \(Int(years)) \(strings("Year")) \(isSince ? "" : ago)"
+                since = "\(isSince ? "\(since) " : "")\(Int(years)) \(strings("Year"))\(isSince ? "" : " \(ago)")"
             }
             return since
         } else {

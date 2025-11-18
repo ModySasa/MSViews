@@ -28,7 +28,7 @@ public func printAppFonts(){
     }
 }
 
-func getAppFont(_ fontWeight : Font.Weight)->String {
+public func getAppFont(_ fontWeight : Font.Weight)->String {
     if MSLanguage.isArabic {
         return appArabicFontName
     } else {

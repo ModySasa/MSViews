@@ -33,10 +33,7 @@ public struct OneLineField: View {
     var onSubmit : ((String)->Void)! = nil
     var onTextChange: ((String)->Void)! = nil
     
-    private var localizedPlaceholder: LocalizedStringKey {
-            LocalizedStringKey(placeHolder)
-        }
-    
+  
     public init(
         txt:Binding<String>,
         errorText:Binding<String>,
@@ -167,11 +164,16 @@ public struct OneLineField: View {
             }
         })
         if ( isPassword && isSecured ) {
-            SecureField("", text: textBinding, prompt: Text(localizedPlaceholder).font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight)).foregroundColor(placeHolderColor))
+            SecureField("", text: textBinding, prompt: Text(placeHolder).font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight)).foregroundColor(placeHolderColor))
             
         } else {
-//            TextField(placeHolder , text: textBinding)
-            TextField("", text: textBinding, prompt: Text(localizedPlaceholder).font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight)).foregroundColor(placeHolderColor))
+            TextField("", text: textBinding)
+                .overlay(alignment:.leading){
+                    if txt.isEmpty{
+                        Text(placeHolder)
+                            .font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight)).foregroundColor(placeHolderColor)
+                    }
+                }
         }
     }
     

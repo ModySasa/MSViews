@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import SwiftUI
 
 public struct ToastMessage: Equatable {
     public let id = UUID()

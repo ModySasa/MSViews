@@ -6,16 +6,15 @@
 //
 
 import Foundation
-import SwiftUI
 
 public struct ToastMessage: Equatable {
     public let id = UUID()
     public let type: CustomToastType
-    public let title: LocalizedStringKey
-    public let message: LocalizedStringKey
+    public let title: String
+    public let message: String
     public let duration: Double
     
-    public init(type: CustomToastType, title: LocalizedStringKey, message: LocalizedStringKey, duration: Double = 3.0) {
+    public init(type: CustomToastType, title: String, message: String, duration: Double = 3.0) {
             self.type = type
             self.title = title
             self.message = message

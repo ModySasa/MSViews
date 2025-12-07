@@ -30,7 +30,7 @@ public struct CustomToastView: View {
                     .frame(width: configuration.iconSize + 6, height: configuration.iconSize + 6)
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    if toast.title != "" {
+                    if !toast.title.isEmpty{
                         Text(toast.title)
                             .font(.custom(getAppFont(configuration.titleWeight), size: configuration.titleSize).weight(configuration.titleWeight))
                             .foregroundColor(configuration.titleColor(for: toast.type))

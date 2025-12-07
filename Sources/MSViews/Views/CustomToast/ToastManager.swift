@@ -25,7 +25,7 @@ public class ToastManager: ObservableObject {
             self.appConfiguration = configuration
     }
     
-    public func show(type: CustomToastType, title: LocalizedStringKey , message: LocalizedStringKey , duration: Double = 3.0) {
+    public func show(type: CustomToastType, title: String , message: String , duration: Double = 3.0) {
         let toast = ToastMessage(
             type: type,
             title: title,
@@ -51,8 +51,8 @@ public class ToastManager: ObservableObject {
     
     public func showWithCustomConfig(
             type: CustomToastType,
-            title: LocalizedStringKey,
-            message: LocalizedStringKey,
+            title: String,
+            message: String,
             duration: Double = 3.0,
             configuration: ToastConfiguration
         ) {

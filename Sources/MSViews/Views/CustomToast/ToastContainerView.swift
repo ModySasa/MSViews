@@ -92,35 +92,35 @@ extension View {
 // MARK: - Global Toast Functions (Uses App Configuration)
 public struct ToastCustom {
     /// Show success toast using app configuration
-    public static func success(_ title: LocalizedStringKey, message: LocalizedStringKey = "", duration: Double = 3.0) {
+    public static func success(_ title: String, message: String = "", duration: Double = 3.0) {
         ToastManager.shared.show(type: .success, title: title, message: message, duration: duration)
     }
     
     /// Show error toast using app configuration
-    public static func error(_ title: LocalizedStringKey, message: LocalizedStringKey = "", duration: Double = 4.0) {
+    public static func error(_ title: String, message: String = "", duration: Double = 4.0) {
         ToastManager.shared.show(type: .error, title: title, message: message, duration: duration)
     }
     
     /// Show warning toast using app configuration
-    public static func warning(_ title: LocalizedStringKey, message: LocalizedStringKey = "", duration: Double = 3.5) {
+    public static func warning(_ title: String, message: String = "", duration: Double = 3.5) {
         ToastManager.shared.show(type: .warning, title: title, message: message, duration: duration)
     }
     
     /// Show info toast using app configuration
-    public static func info(_ title: LocalizedStringKey, message: LocalizedStringKey = "", duration: Double = 3.0) {
+    public static func info(_ title: String, message: String = "", duration: Double = 3.0) {
         ToastManager.shared.show(type: .info, title: title, message: message, duration: duration)
     }
     
     /// Show custom toast with app configuration
-    public static func show(type: CustomToastType, title: LocalizedStringKey, message: LocalizedStringKey = "", duration: Double = 3.0) {
+    public static func show(type: CustomToastType, title: String, message: String = "", duration: Double = 3.0) {
         ToastManager.shared.show(type: type, title: title, message: message, duration: duration)
     }
     
     /// Show toast with custom configuration (rare use case - overrides app config)
     public static func showCustom(
         type: CustomToastType,
-        title: LocalizedStringKey,
-        message: LocalizedStringKey = "",
+        title: String,
+        message: String = "",
         duration: Double = 3.0,
         configuration: ToastConfiguration
     ) {

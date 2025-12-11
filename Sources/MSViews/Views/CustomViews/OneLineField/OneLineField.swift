@@ -164,7 +164,17 @@ public struct OneLineField: View {
             }
         })
         if ( isPassword && isSecured ) {
-            SecureField("", text: textBinding, prompt: Text(placeHolder).font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight)).foregroundColor(placeHolderColor))
+            SecureField(
+                "",
+                text: textBinding,
+//                prompt: Text(placeHolder).font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight)).foregroundColor(placeHolderColor)
+            )
+            .overlay(alignment:.leading){
+                if txt.isEmpty{
+                    Text(placeHolder)
+                        .font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight)).foregroundColor(placeHolderColor)
+                }
+            }
             
         } else {
             TextField("", text: textBinding)

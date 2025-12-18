@@ -173,6 +173,7 @@ public struct OneLineField: View {
                 if txt.isEmpty{
                     Text(placeHolder)
                         .font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight)).foregroundColor(placeHolderColor)
+                        .allowsHitTesting(false)
                 }
             }
             
@@ -182,6 +183,7 @@ public struct OneLineField: View {
                     if txt.isEmpty{
                         Text(placeHolder)
                             .font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight)).foregroundColor(placeHolderColor)
+                            .allowsHitTesting(false)
                     }
                 }
         }

@@ -29,6 +29,7 @@ public enum FontNames:String {
     case crimsonText = "Crimsontext"
     case inter = "Inter28pt"
     case ruda = "Ruda"
+    case instrumentSansCondensed = "InstrumentSans_Condensed"
 }
 
 public func setAppFontName(_ name:FontNames){

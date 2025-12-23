@@ -188,7 +188,7 @@ public extension View {
     }
 }
 
-public enum FieldToFocus {
+public enum FieldToFocus: Hashable {
     case nothing
     case phone
     case password

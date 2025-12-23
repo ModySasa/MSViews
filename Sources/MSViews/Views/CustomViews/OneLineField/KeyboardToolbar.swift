@@ -246,9 +246,9 @@ public enum FieldToFocus {
     case field_19
     case field_20
     
-    case dynamicField(Int)
+    case dynamicIndex(Int)
     
     static func dynamicField(_ index: Int) -> FieldToFocus {
-            return .dynamicField(index)
+            return .dynamicIndex(index)
     }
 }

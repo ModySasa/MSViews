@@ -21,6 +21,7 @@ public struct Switch: View {
     var irisRadius : CGFloat = 2
     var irisPadding : CGFloat = 5
     var irisType : Iris_type = .circle
+    var onToggleClicked: () -> Void = { }
     
     public init(
         isOn: Binding<Bool>
@@ -82,6 +83,7 @@ public struct Switch: View {
         .onTapGesture {
             withAnimation {
                 isOn.toggle()
+                onToggleClicked()
             }
         }
     }

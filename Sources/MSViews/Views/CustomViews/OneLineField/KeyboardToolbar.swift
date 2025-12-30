@@ -39,6 +39,17 @@ public struct KeyboardModifier : ViewModifier {
                         }
                     }
                 }
+            } else {
+                if let first = keys.first , let isSecured = textsSecure.first , let currentText = textsInPage.first {
+                    let securedText = self.maskString(currentText.wrappedValue)
+                    let securedBText = Binding<String>.init {
+                        return securedText
+                    } set: { _ in
+                        
+                    }
+                    //                            print("FOCUS STATE : TEXT" , currentText)
+                    return isSecured.wrappedValue ? securedBText : currentText
+                }
             }
             return .constant("")
         }

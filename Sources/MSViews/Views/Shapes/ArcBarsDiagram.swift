@@ -16,6 +16,12 @@ public struct ArcBarsDiagram : View {
         items.reduce(0) { $0 + $1.data }
     }
     
+    public init(items: [DataEntity], lineWidth: CGFloat, padding: CGFloat) {
+        self.items = items
+        self.lineWidth = lineWidth
+        self.padding = padding
+    }
+    
     public var body: some View {
         ZStack {
             if(!items.isEmpty) {

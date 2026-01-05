@@ -35,71 +35,79 @@ public struct ArcBarsDiagram : View {
                         previousItem: (index ?? 0) > 0 ? items[(index ?? 0) - 1] : nil
                     )
                 }
+                .onAppear(perform: {
+                    let duration: Double = 0.1
+
+                    for i in 0..<items.count {
+                        animatedEndAngles[i] = startAngles[i]
+
+                        withAnimation(
+                            .easeOut(duration: duration)
+                            .delay(Double(i) * duration)
+                        ) {
+                            animatedEndAngles[i] = endAngles[i]
+                        }
+                    }
+                })
             }
+        }
+        .onAppear {
+            animatedEndAngles = .init(repeating:0 , count: items.count)
+            for i in 0..<items.count {
+                if i == 0 {
+                    startAngles.append(0)
+                } else {
+                    let previousItem = i > 0 ? items[i - 1] : nil
+                    if let previousItem {
+                        startAngles.append(calculateEndAngle(item: previousItem))
+                    } else {
+                        startAngles.append(0)
+                    }
+                }
+                endAngles.append(calculateEndAngle(item: items[i]))
+            }
+            print(animatedEndAngles , startAngles , endAngles)
         }
     }
     
-    public struct DataEntity : Identifiable , Equatable {
-        public let id : String = UUID().uuidString
-        let data : Double
-        let color : Color
-        let showPercentage: Bool
-        let percentageColor : Color?
-        let customTitle: String?
-        
-        public static func == (lhs: DataEntity, rhs: DataEntity) -> Bool {
-            lhs.id == rhs.id
-        }
-        
-        public init(
-            data: Double,
-            color: Color,
-            showPercentage: Bool,
-            percentageColor: Color? = nil,
-            customTitle: String? = nil
-        ) {
-            self.data = data
-            self.color = color
-            self.showPercentage = showPercentage
-            self.percentageColor = percentageColor
-            self.customTitle = customTitle
-        }
-    }
+    @State private var animatedEndAngles: [Double] = []
+    
+    @State private var startAngles: [Double] = []
+    
+    @State private var endAngles: [Double] = []
     
     @ViewBuilder
     func theArc(item : DataEntity , nextItem : DataEntity? = nil , previousItem : DataEntity? = nil) -> some View {
-        let startAngle : Double = if let previousItem {
-            calculateEndAngle(item: previousItem)
-        } else {
-            0
-        }
-        
-        let endAngle : Double = calculateEndAngle(item: item)
-        
-        ArcBarsPath(
-            startAngle: startAngle,
-            endAngle: endAngle,
-            insetAmount: 0
-        )
-        .strokeBorder(lineWidth: 10)
-        .foregroundStyle(item.color)
-        .overlay {
-            GeometryReader { geo in
-                let r = min(geo.size.width, geo.size.height) / 2
-                let midAngle = (startAngle + endAngle) / 2
-                let angle = Angle.degrees(midAngle)
-                
-                let textRadius = r + lineWidth / 2 + padding
-                
-                let x = geo.size.width / 2 + cos(angle.radians) * textRadius
-                let y = geo.size.height / 2 + sin(angle.radians) * textRadius
-                
-                if(item.showPercentage) {
-                    Text(item.customTitle ?? "\( String(format: "%.02f", item.data / total))%")
-                        .position(x: x, y: y)
-                        .foregroundStyle(
-                            item.percentageColor ?? item.color
-                        )
+        if(!startAngles.isEmpty && !endAngles.isEmpty && !animatedEndAngles.isEmpty) {
+            let index = items.firstIndex(of: item) ?? 0
+            let startAngle : Double = startAngles[index]
+            let endAngle : Double = endAngles[index]
+            
+            ArcBarsPath(
+                startAngle: startAngle,
+                endAngle: animatedEndAngles[index],
+                insetAmount: 0
+            )
+            .strokeBorder(lineWidth: 10)
+            .foregroundStyle(item.color)
+            .overlay {
+                GeometryReader { geo in
+                    let r = min(geo.size.width, geo.size.height) / 2
+                    let midAngle = (startAngle + endAngle) / 2
+                    let angle = Angle.degrees(midAngle)
+                    
+                    let textRadius = r + lineWidth / 2 + padding
+                    
+                    let x = geo.size.width / 2 + cos(angle.radians) * textRadius
+                    let y = geo.size.height / 2 + sin(angle.radians) * textRadius
+                    
+                    if(item.showPercentage) {
+                        Text(item.customTitle ?? "\( String(format: "%.02f", item.data / total))%")
+                            .position(x: x, y: y)
+                            .foregroundStyle(
+                                item.percentageColor ?? item.color
+                            )
+                    }
                 }
             }
         }
@@ -135,13 +143,44 @@ public struct ArcBarsDiagram : View {
         }
     }
     
+    public struct DataEntity : Identifiable , Equatable {
+        public let id : String = UUID().uuidString
+        let data : Double
+        let color : Color
+        let showPercentage: Bool
+        let percentageColor : Color?
+        let customTitle: String?
+        
+        public static func == (lhs: DataEntity, rhs: DataEntity) -> Bool {
+            lhs.id == rhs.id
+        }
+        
+        public init(
+            data: Double,
+            color: Color,
+            showPercentage: Bool,
+            percentageColor: Color? = nil,
+            customTitle: String? = nil
+        ) {
+            self.data = data
+            self.color = color
+            self.showPercentage = showPercentage
+            self.percentageColor = percentageColor
+            self.customTitle = customTitle
+        }
+    }
 }
 
 struct ArcBarsPath: InsettableShape {
     var startAngle : Double = 0
-    var endAngle : Double = 90
+    var endAngle : Double
     var insetAmount: CGFloat = 0
     let defaultAngel : Double = 90
+    
+    var animatableData: Double {
+        get { endAngle }
+        set { endAngle = newValue }
+    }
     
     public func path(in rect: CGRect) -> Path {
         let r = min(rect.width, rect.height) / 2 - insetAmount

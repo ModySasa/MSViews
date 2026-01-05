@@ -21,6 +21,7 @@ public struct Switch: View {
     var irisRadius : CGFloat = 2
     var irisPadding : CGFloat = 5
     var irisType : Iris_type = .circle
+    var onToggleClicked: () -> Void = { }
     
     public init(
         isOn: Binding<Bool>
@@ -36,6 +37,7 @@ public struct Switch: View {
         , irisRadius: CGFloat =  2
         , irisPadding: CGFloat =  5
         , irisType: Iris_type = .circle
+        , onToggleClicked: @escaping () -> Void = { }
     ) {
         self._isOn = isOn
         self.isOnBackColor = isOnBackColor
@@ -50,6 +52,7 @@ public struct Switch: View {
         self.irisRadius = irisRadius
         self.irisPadding = irisPadding
         self.irisType = irisType
+        self.onToggleClicked = onToggleClicked
     }
     
     public enum Iris_type {
@@ -82,6 +85,7 @@ public struct Switch: View {
         .onTapGesture {
             withAnimation {
                 isOn.toggle()
+                onToggleClicked()
             }
         }
     }

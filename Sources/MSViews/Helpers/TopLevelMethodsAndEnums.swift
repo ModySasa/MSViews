@@ -30,42 +30,48 @@ public func printAppFonts(){
 
 public func getAppFont(_ fontWeight : Font.Weight)->String {
     if MSLanguage.isArabic {
-        return appArabicFontName
+        checkFonts(appArabicFontName , fontWeight: fontWeight)
     } else {
-        if(
-            appFontName == FontNames.gilroy.rawValue
-            || appFontName == FontNames.crimsonText.rawValue
-            || appFontName == FontNames.inter.rawValue
-            || appFontName == FontNames.instrumentSans.rawValue
-            || appFontName == FontNames.instrumentSansCondensed.rawValue
-        ) {
-            var namee = appFontName
-            switch fontWeight {
-            case .bold:
-                namee = "\(appFontName)-Bold"
-                break
-            case .heavy:
-                namee = "\(appFontName)-Heavy"
-                break
-            case .medium:
-                namee = "\(appFontName)-Medium"
-                break
-            case .regular:
-                namee = "\(appFontName)-Regular"
-                break
-            case .light:
-                namee = "\(appFontName)-Light"
-                break
-            case .semibold:
-                namee = appFontName == FontNames.inter.rawValue ? "\(appFontName)-SemiBold" : "\(appFontName)-Semibold"
-                break
-            default:
-                namee = "\(appFontName)-Regular"
-            }
-            return namee
-        } else {
-            return appFontName
+        checkFonts(appFontName , fontWeight: fontWeight)
+    }
+}
+
+func checkFonts(_ font : String , fontWeight : Font.Weight) -> String {
+    if(
+        font == FontNames.gilroy.rawValue
+        || font == FontNames.crimsonText.rawValue
+        || font == FontNames.inter.rawValue
+        || font == FontNames.instrumentSans.rawValue
+        || font == FontNames.instrumentSansCondensed.rawValue
+        || font == FontNames.helveticaNeue.rawValue
+        || font == FontNames.ibmPlexSansArabic.rawValue
+    ) {
+        var namee = font
+        switch fontWeight {
+        case .bold:
+            namee = "\(font)-Bold"
+            break
+        case .heavy:
+            namee = "\(font)-Heavy"
+            break
+        case .medium:
+            namee = "\(font)-Medium"
+            break
+        case .regular:
+            namee = "\(font)-Regular"
+            break
+        case .light:
+            namee = "\(font)-Light"
+            break
+        case .semibold:
+            namee = font == FontNames.inter.rawValue ? "\(font)-SemiBold" : "\(font)-Semibold"
+            break
+        default:
+            namee = "\(font)-Regular"
         }
+        return namee
+    } else {
+        return font
     }
 }
 

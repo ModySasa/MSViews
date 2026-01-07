@@ -31,6 +31,8 @@ public enum FontNames:String {
     case ruda = "Ruda"
     case instrumentSansCondensed = "InstrumentSansCondensed"
     case instrumentSans = "InstrumentSans"
+    case helveticaNeue = "HelveticaNeue"
+    case ibmPlexSansArabic = "IBMPlexSansArabic"
 }
 
 public func setAppFontName(_ name:FontNames){

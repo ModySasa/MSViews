@@ -58,13 +58,13 @@ func checkFonts(_ font : String , fontWeight : Font.Weight) -> String {
             namee = "\(font)-Medium"
             break
         case .regular:
-            namee = "\(font)-Regular"
+            namee = font == FontNames.helveticaNeue.rawValue ? "HelveticaNeue-Medium" : "\(font)-Regular"
             break
         case .light:
             namee = "\(font)-Light"
             break
         case .semibold:
-            namee = font == FontNames.inter.rawValue ? "\(font)-SemiBold" : "\(font)-Semibold"
+            namee = font == FontNames.inter.rawValue ? "\(font)-SemiBold" : font == FontNames.helveticaNeue.rawValue ? "HelveticaNeue-Medium" : "\(font)-Semibold"
             break
         default:
             namee = "\(font)-Regular"

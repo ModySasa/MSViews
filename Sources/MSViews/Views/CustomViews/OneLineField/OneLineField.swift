@@ -271,12 +271,20 @@ struct OneLineField_Previews: PreviewProvider {
     }
 }
 
-struct PasswordStrengthView : View {
+public struct PasswordStrengthView : View {
     @State var strenghText = ""
-    @Binding var passwordStrength : OneLineField.PasswordStrength
-    @Binding var passwordTxt : String
+    @Binding public var passwordStrength : OneLineField.PasswordStrength
+    @Binding public var passwordTxt : String
     
-    var body: some View {
+    public init(
+        passwordStrength: Binding<OneLineField.PasswordStrength>,
+        passwordTxt: Binding<String>
+    ) {
+        self._passwordStrength = passwordStrength
+        self._passwordTxt = passwordTxt
+    }
+    
+    public var body: some View {
         VStack(alignment:.leading , spacing:0) {
             if(!passwordTxt.isEmpty) {
                 HStack(spacing:5){

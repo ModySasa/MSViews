@@ -13,7 +13,7 @@ public struct CustomCalendarView : View {
         selection: Binding<Date?>,
         style: CalendarStyle = .init(
             todayBackground: MSViews.shared.viewsHelper.borderColor,
-            todayOpacityWhenNotSelected: 0.3,
+            todayOpacityWhenNotSelected: 0.6,
             selectedBackground: MSViews.shared.viewsHelper.mainAppColor,
             selectedText: MSViews.shared.viewsHelper.mainButtonTextColor,
             currentMonthText: .black,
@@ -23,6 +23,7 @@ public struct CustomCalendarView : View {
             font: .body
         ),
         showTodayButton: Bool = true,
+        hasSpacer: Bool = true,
         firstWeekday: Weekday = .sunday,
         minDate: Date? = nil,
         maxDate: Date? = nil
@@ -39,6 +40,7 @@ public struct CustomCalendarView : View {
     var style: CalendarStyle = CalendarStyle()
     
     var showTodayButton: Bool = true
+    var hasSpacer : Bool = true
     var firstWeekday: Weekday = .sunday
     
     var minDate: Date? = nil
@@ -58,7 +60,9 @@ public struct CustomCalendarView : View {
                 .onAppear {
                     updateCalendar()
                 }
-            Spacer()
+            if(hasSpacer) {
+                Spacer()
+            }
         }
     }
     

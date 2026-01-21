@@ -411,15 +411,15 @@ public struct CalendarStyle {
     )
     
     public static func copyWith(
-        todayBackground: Color?,
-        todayOpacityWhenNotSelected: Double?,
-        selectedBackground: Color?,
-        selectedText: Color?,
-        currentMonthText: Color?,
-        otherMonthText: Color?,
-        daySize: CGFloat?,
-        circleCornerRadius: CGFloat?,
-        font: Font?
+        todayBackground: Color? = nil,
+        todayOpacityWhenNotSelected: Double? = nil,
+        selectedBackground: Color? = nil,
+        selectedText: Color? = nil,
+        currentMonthText: Color? = nil,
+        otherMonthText: Color? = nil,
+        daySize: CGFloat? = nil,
+        circleCornerRadius: CGFloat? = nil,
+        font: Font? = nil
     ) -> CalendarStyle{
         return .init (
             todayBackground:todayBackground ?? CalendarStyle.defaultStyle.todayBackground,

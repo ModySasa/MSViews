@@ -11,17 +11,7 @@ public struct CustomCalendarView : View {
     
     public init(
         selection: Binding<Date?>,
-        style: CalendarStyle = .init(
-            todayBackground: MSViews.shared.viewsHelper.borderColor,
-            todayOpacityWhenNotSelected: 0.6,
-            selectedBackground: MSViews.shared.viewsHelper.mainAppColor,
-            selectedText: MSViews.shared.viewsHelper.mainButtonTextColor,
-            currentMonthText: .black,
-            otherMonthText: .gray,
-            daySize: 40,
-            circleCornerRadius: 13,
-            font: .body
-        ),
+        style: CalendarStyle = .defaultStyle,
         showTodayButton: Bool = true,
         hasSpacer: Bool = true,
         firstWeekday: Weekday = .sunday,
@@ -406,5 +396,41 @@ public struct CalendarStyle {
         self.daySize = daySize
         self.circleCornerRadius = circleCornerRadius
         self.font = font
+    }
+    
+    public static var defaultStyle = CalendarStyle.init(
+        todayBackground: MSViews.shared.viewsHelper.borderColor,
+        todayOpacityWhenNotSelected: 0.6,
+        selectedBackground: MSViews.shared.viewsHelper.mainAppColor,
+        selectedText: MSViews.shared.viewsHelper.mainButtonTextColor,
+        currentMonthText: .black,
+        otherMonthText: .gray,
+        daySize: 40,
+        circleCornerRadius: 13,
+        font: .body
+    )
+    
+    public static func copyWith(
+        todayBackground: Color?,
+        todayOpacityWhenNotSelected: Double?,
+        selectedBackground: Color?,
+        selectedText: Color?,
+        currentMonthText: Color?,
+        otherMonthText: Color?,
+        daySize: CGFloat?,
+        circleCornerRadius: CGFloat?,
+        font: Font?
+    ) -> CalendarStyle{
+        return .init (
+            todayBackground:todayBackground ?? CalendarStyle.defaultStyle.todayBackground,
+            todayOpacityWhenNotSelected:todayOpacityWhenNotSelected ?? CalendarStyle.defaultStyle.todayOpacityWhenNotSelected,
+            selectedBackground:selectedBackground ?? CalendarStyle.defaultStyle.selectedBackground,
+            selectedText:selectedText ?? CalendarStyle.defaultStyle.selectedText,
+            currentMonthText:currentMonthText ?? CalendarStyle.defaultStyle.currentMonthText,
+            otherMonthText:otherMonthText ?? CalendarStyle.defaultStyle.otherMonthText,
+            daySize:daySize ?? CalendarStyle.defaultStyle.daySize,
+            circleCornerRadius:circleCornerRadius ?? CalendarStyle.defaultStyle.circleCornerRadius,
+            font:font ?? CalendarStyle.defaultStyle.font
+        )
     }
 }

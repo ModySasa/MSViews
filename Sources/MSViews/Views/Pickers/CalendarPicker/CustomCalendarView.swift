@@ -399,7 +399,7 @@ public struct CalendarStyle {
     }
     
     public static var defaultStyle = CalendarStyle.init(
-        todayBackground: MSViews.shared.viewsHelper.borderColor,
+        todayBackground: MSViews.shared.viewsHelper.mainAppColor,
         todayOpacityWhenNotSelected: 0.6,
         selectedBackground: MSViews.shared.viewsHelper.mainAppColor,
         selectedText: MSViews.shared.viewsHelper.mainButtonTextColor,

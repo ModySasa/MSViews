@@ -11,7 +11,17 @@ public struct CustomCalendarView : View {
     
     public init(
         selection: Binding<Date?>,
-        style: CalendarStyle = .init(),
+        style: CalendarStyle = .init(
+            todayBackground: MSViews.shared.viewsHelper.borderColor,
+            todayOpacityWhenNotSelected: 0.3,
+            selectedBackground: MSViews.shared.viewsHelper.mainAppColor,
+            selectedText: MSViews.shared.viewsHelper.mainButtonTextColor,
+            currentMonthText: .black,
+            otherMonthText: .gray,
+            daySize: 40,
+            circleCornerRadius: 13,
+            font: .body
+        ),
         showTodayButton: Bool = true,
         firstWeekday: Weekday = .sunday,
         minDate: Date? = nil,

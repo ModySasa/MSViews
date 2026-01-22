@@ -24,6 +24,7 @@ public struct CustomCalendarView : View {
         self.firstWeekday = firstWeekday
         self.minDate = minDate
         self.maxDate = maxDate
+        self.hasSpacer = hasSpacer
     }
     
     @Binding var selection: Date?

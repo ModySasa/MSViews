@@ -54,7 +54,7 @@ public struct CustomCalendarView : View {
                 .onAppear {
                     updateCalendar()
                 }
-                .onChange(of: selection, perform: { oldValue, newValue in
+                .onChange(of: selection, perform: { newValue in
                     if let newValue = newValue {
                         currentDate = newValue
                         updateCalendar()

@@ -25,6 +25,9 @@ public struct CustomCalendarView : View {
         self.minDate = minDate
         self.maxDate = maxDate
         self.hasSpacer = hasSpacer
+        
+        self._currentDate = State(initialValue: selection.wrappedValue ?? Date())
+
     }
     
     @Binding var selection: Date?
@@ -40,7 +43,7 @@ public struct CustomCalendarView : View {
     @State var currentDay : Int = 0
     @State var currentDayOfTheWeek : String = ""
     @State var currentMonth : String = ""
-    @State private var currentDate: Date = Date()
+    @State private var currentDate: Date
     @State private var slideDirection: CGFloat = 0
     
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
@@ -51,6 +54,12 @@ public struct CustomCalendarView : View {
                 .onAppear {
                     updateCalendar()
                 }
+                .onChange(of: selection) { oldValue, newValue in
+                                if let newValue = newValue {
+                                    currentDate = newValue
+                                    updateCalendar()
+                                }
+                            }
             if(hasSpacer) {
                 Spacer()
             }

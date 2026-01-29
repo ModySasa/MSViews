@@ -54,15 +54,15 @@ public struct CustomCalendarView : View {
                 .onAppear {
                     updateCalendar()
                 }
-                .onChange(of: selection) { oldValue, newValue in
-                                if let newValue = newValue {
-                                    currentDate = newValue
-                                    updateCalendar()
-                                }
-                            }
-            if(hasSpacer) {
-                Spacer()
-            }
+                .onChange(of: selection, perform: { oldValue, newValue in
+                    if let newValue = newValue {
+                        currentDate = newValue
+                        updateCalendar()
+                    }
+                }
+                          if(hasSpacer) {
+                    Spacer()
+                }
         }
     }
     

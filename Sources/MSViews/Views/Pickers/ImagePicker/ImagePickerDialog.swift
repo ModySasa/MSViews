@@ -8,16 +8,24 @@
 import SwiftUI
 import PhotosUI
 
-struct ImagePickerDialog: View {
+public struct ImagePickerDialog: View {
     @State var selectedImage : UIImage? = nil
     @State var fileUrl : URL? = nil
     @State private var isImagePickerPresented = false
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     
-    var hasBorder : Bool = false
-    var onImageSet : ((UIImage , URL?) -> Void)? = nil
+    public var hasBorder : Bool = false
+    public var onImageSet : ((UIImage , URL?) -> Void)? = nil
     
-    var body: some View {
+    public init(
+        hasBorder: Bool = false,
+        onImageSet: ((UIImage, URL?) -> Void)? = nil
+    ) {
+        self.hasBorder = hasBorder
+        self.onImageSet = onImageSet
+    }
+    
+    public var body: some View {
             RoundedRectangle(cornerRadius: 15)
                 .stroke(
                     style:

@@ -24,6 +24,10 @@ public struct CustomCalendarView : View {
         self.firstWeekday = firstWeekday
         self.minDate = minDate
         self.maxDate = maxDate
+        self.hasSpacer = hasSpacer
+        
+        self._currentDate = State(initialValue: selection.wrappedValue ?? Date())
+        
     }
     
     @Binding var selection: Date?
@@ -39,7 +43,7 @@ public struct CustomCalendarView : View {
     @State var currentDay : Int = 0
     @State var currentDayOfTheWeek : String = ""
     @State var currentMonth : String = ""
-    @State private var currentDate: Date = Date()
+    @State private var currentDate: Date
     @State private var slideDirection: CGFloat = 0
     
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
@@ -50,6 +54,13 @@ public struct CustomCalendarView : View {
                 .onAppear {
                     updateCalendar()
                 }
+                .onChange(of: selection, perform: { newValue in
+                    if let newValue = newValue {
+                        currentDate = newValue
+                        updateCalendar()
+                    }
+                })
+            
             if(hasSpacer) {
                 Spacer()
             }
@@ -76,15 +87,15 @@ public struct CustomCalendarView : View {
                 } label: {
                     Image(systemName: "chevron.left")
                 }
-
+                
                 Spacer()
-
+                
                 Text(currentMonth)
                     .font(.title)
                     .bold()
-
+                
                 Spacer()
-
+                
                 Button {
                     if let maxDate = maxDate {
                         let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: currentDate)!
@@ -102,7 +113,7 @@ public struct CustomCalendarView : View {
                     Image(systemName: "chevron.right")
                 }
             }
-
+            
             weekDays
             
             theDaysGrid
@@ -114,7 +125,7 @@ public struct CustomCalendarView : View {
         )
         .padding()
     }
-
+    
     var gesture: _EndedGesture<DragGesture> {
         DragGesture()
             .onEnded { value in
@@ -152,34 +163,34 @@ public struct CustomCalendarView : View {
     func generateDays() -> [(day: Int, isCurrentMonth: Bool)] {
         let calendar = Calendar.current
         let date = currentDate
-
+        
         // Current month info
         let currentRange = calendar.range(of: .day, in: .month, for: date)!
         let daysInCurrentMonth = currentRange.count
-
+        
         let firstOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: date))!
         var firstWeekdayOfMonth = calendar.component(.weekday, from: firstOfMonth)
         firstWeekdayOfMonth = (firstWeekdayOfMonth - firstWeekday.rawValue + 7) % 7
-
+        
         // Previous month info
         let previousMonth = calendar.date(byAdding: .month, value: -1, to: date)!
         let prevRange = calendar.range(of: .day, in: .month, for: previousMonth)!
         let daysInPreviousMonth = prevRange.count
-
+        
         var result: [(Int, Bool)] = []
-
+        
         // 1️⃣ Previous month days
         if firstWeekdayOfMonth > 0 {
             for day in (daysInPreviousMonth - firstWeekdayOfMonth + 1)...daysInPreviousMonth {
                 result.append((day, false))
             }
         }
-
+        
         // 2️⃣ Current month days
         for day in 1...daysInCurrentMonth {
             result.append((day, true))
         }
-
+        
         // 3️⃣ Next month days
         let remaining = 42 - result.count
         if remaining > 0 {
@@ -187,14 +198,14 @@ public struct CustomCalendarView : View {
                 result.append((day, false))
             }
         }
-
+        
         return result
     }
     
     func updateCalendar() {
         let calendar = Calendar.current
         currentDay = calendar.component(.day, from: currentDate)
-
+        
         currentMonth = DateFormatter().monthSymbols[
             calendar.component(.month, from: currentDate) - 1
         ]
@@ -203,10 +214,10 @@ public struct CustomCalendarView : View {
     func isToday(day: Int) -> Bool {
         let calendar = Calendar.current
         let today = Date()
-
+        
         return calendar.component(.day, from: today) == day &&
-               calendar.component(.month, from: today) == calendar.component(.month, from: currentDate) &&
-               calendar.component(.year, from: today) == calendar.component(.year, from: currentDate)
+        calendar.component(.month, from: today) == calendar.component(.month, from: currentDate) &&
+        calendar.component(.year, from: today) == calendar.component(.year, from: currentDate)
     }
     
     var weekDays : some View {
@@ -235,23 +246,23 @@ public struct CustomCalendarView : View {
         var dayDateComponents = calendar.dateComponents([.year, .month], from: currentDate)
         dayDateComponents.day = item.day
         guard let dayDate = calendar.date(from: dayDateComponents) else { return Color.clear }
-
+        
         // Disable background if outside range
         if let minDate = minDate, dayDate < minDate { return Color.clear }
         if let maxDate = maxDate, dayDate > maxDate { return Color.clear }
-
+        
         // Selected day
         if item.isCurrentMonth,
            let selected = selection,
            calendar.isDate(selected, inSameDayAs: dayDate) {
             return style.selectedBackground
         }
-
+        
         // Today
         if item.isCurrentMonth, isToday(day: item.day) {
             return style.todayBackground.opacity(selection != nil ? style.todayOpacityWhenNotSelected : 1)
         }
-
+        
         return Color.clear
     }
     
@@ -260,11 +271,11 @@ public struct CustomCalendarView : View {
         var dayDateComponents = calendar.dateComponents([.year, .month], from: currentDate)
         dayDateComponents.day = item.day
         guard let dayDate = calendar.date(from: dayDateComponents) else { return .gray }
-
+        
         // Outside min/max range
         if let minDate = minDate, dayDate < minDate { return .gray }
         if let maxDate = maxDate, dayDate > maxDate { return .gray }
-
+        
         if item.isCurrentMonth {
             if let selected = selection, calendar.isDate(selected, inSameDayAs: dayDate) {
                 return style.selectedText
@@ -351,7 +362,7 @@ public enum Weekday: Int {
     case thursday = 5
     case friday = 6
     case saturday = 7
-
+    
     var shortName: String {
         switch self {
         case .sunday: return "Sun"

@@ -16,7 +16,8 @@ public struct CustomCalendarView : View {
         hasSpacer: Bool = true,
         firstWeekday: Weekday = .sunday,
         minDate: Date? = nil,
-        maxDate: Date? = nil
+        maxDate: Date? = nil,
+        enableYearPicker: Bool = false
     ) {
         self._selection = selection
         self.style = style
@@ -25,9 +26,8 @@ public struct CustomCalendarView : View {
         self.minDate = minDate
         self.maxDate = maxDate
         self.hasSpacer = hasSpacer
-        
+        self.enableYearPicker = enableYearPicker
         self._currentDate = State(initialValue: selection.wrappedValue ?? Date())
-        
     }
     
     @Binding var selection: Date?
@@ -39,12 +39,14 @@ public struct CustomCalendarView : View {
     
     var minDate: Date? = nil
     var maxDate: Date? = nil
+    var enableYearPicker: Bool = false
     
     @State var currentDay : Int = 0
     @State var currentDayOfTheWeek : String = ""
     @State var currentMonth : String = ""
     @State private var currentDate: Date
     @State private var slideDirection: CGFloat = 0
+    @State private var showYearPicker: Bool = false
     
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
     
@@ -114,9 +116,16 @@ public struct CustomCalendarView : View {
                 }
             }
             
-            weekDays
+            if enableYearPicker {
+                Toggle("Year Mode", isOn: $showYearPicker)
+            }
             
-            theDaysGrid
+            if showYearPicker && enableYearPicker {
+                yearsGrid
+            } else {
+                weekDays
+                theDaysGrid
+            }
             
             todayButton
         }
@@ -342,6 +351,45 @@ public struct CustomCalendarView : View {
             .padding(.top, 4)
         }
     }
+    
+    var yearsGrid: some View {
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: currentDate)
+        
+        let minYear = minDate != nil ? calendar.component(.year, from: minDate!) : currentYear - 50
+        let maxYear = maxDate != nil ? calendar.component(.year, from: maxDate!) : currentYear + 50
+        
+        let years = Array(minYear...maxYear)
+        let columns = Array(repeating: GridItem(.flexible()), count: 4)
+        
+        return ScrollView {
+            LazyVGrid(columns: columns, spacing: 12) {
+                ForEach(years, id: \.self) { year in
+                    Text("\(year)")
+                        .frame(height: 40)
+                        .frame(maxWidth: .infinity)
+                        .background(
+                            year == currentYear ? style.selectedBackground : Color.clear
+                        )
+                        .foregroundColor(
+                            year == currentYear ? style.selectedText : .primary
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .onTapGesture {
+                            var comps = calendar.dateComponents([.month, .day], from: currentDate)
+                            comps.year = year
+                            if let newDate = calendar.date(from: comps) {
+                                currentDate = newDate
+                                selection = newDate
+                                updateCalendar()
+                                showYearPicker = false
+                            }
+                        }
+                }
+            }
+            .padding(.top, 8)
+        }
+    }
 }
 
 #Preview {
@@ -350,7 +398,8 @@ public struct CustomCalendarView : View {
         showTodayButton: true,
         firstWeekday: .saturday,
         minDate: Date().addingTimeInterval(-28 * 24 * 60 * 60),
-        maxDate: Date().addingTimeInterval(2 * 30 * 24 * 60 * 60)
+        maxDate: Date().addingTimeInterval(2 * 30 * 24 * 60 * 60),
+        enableYearPicker:true
     )
 }
 

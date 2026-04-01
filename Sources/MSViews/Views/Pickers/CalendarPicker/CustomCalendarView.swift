@@ -371,7 +371,10 @@ public struct CustomCalendarView : View {
             }
         )) {
             ForEach(years, id: \.self) { year in
-                Text("\(year)").tag(year)
+                Text(String(year))
+                    .font(style.font)
+                    .foregroundColor(style.currentMonthText)
+                    .tag(year)
             }
         }
         .pickerStyle(.menu)

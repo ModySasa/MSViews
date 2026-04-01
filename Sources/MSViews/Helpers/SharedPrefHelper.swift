@@ -32,6 +32,32 @@ public class SharedPrefHelper{
         }
     }
     
+    
+    public func setSharedPref<T>(key: String, value: T) {
+        let defaults = UserDefaults.standard
+        defaults.set(value, forKey: key)
+    }
+    
+    public func getSharedPref<T>(key: String) -> T? {
+        let defaults = UserDefaults.standard
+        
+        if T.self == Bool.self {
+            return defaults.bool(forKey: key) as? T
+        } else if T.self == Int.self {
+            return defaults.integer(forKey: key) as? T
+        } else if T.self == String.self {
+            return defaults.string(forKey: key) as? T
+        } else if T.self == Double.self {
+            return defaults.double(forKey: key) as? T
+        } else if T.self == Float.self {
+            return defaults.float(forKey: key) as? T
+        } else if T.self == Data.self {
+            return defaults.data(forKey: key) as? T
+        } else {
+            return defaults.object(forKey: key) as? T
+        }
+    }
+    
     public func removeAllSharedKeys(){
         let defaults = UserDefaults.standard
         for key in appKeys {

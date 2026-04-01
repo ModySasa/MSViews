@@ -46,7 +46,6 @@ public struct CustomCalendarView : View {
     @State var currentMonth : String = ""
     @State private var currentDate: Date
     @State private var slideDirection: CGFloat = 0
-    @State private var showYearPicker: Bool = false
     
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
     
@@ -117,16 +116,12 @@ public struct CustomCalendarView : View {
             }
             
             if enableYearPicker {
-                Toggle("Year Mode", isOn: $showYearPicker)
+                yearPicker
             }
-            
-            if showYearPicker && enableYearPicker {
-                yearsGrid
-            } else {
-                weekDays
-                theDaysGrid
-            }
-            
+
+            weekDays
+            theDaysGrid
+
             todayButton
         }
         .gesture(
@@ -352,43 +347,34 @@ public struct CustomCalendarView : View {
         }
     }
     
-    var yearsGrid: some View {
+    var yearPicker: some View {
         let calendar = Calendar.current
         let currentYear = calendar.component(.year, from: currentDate)
-        
+
         let minYear = minDate != nil ? calendar.component(.year, from: minDate!) : currentYear - 50
         let maxYear = maxDate != nil ? calendar.component(.year, from: maxDate!) : currentYear + 50
-        
+
         let years = Array(minYear...maxYear)
-        let columns = Array(repeating: GridItem(.flexible()), count: 4)
-        
-        return ScrollView {
-            LazyVGrid(columns: columns, spacing: 12) {
-                ForEach(years, id: \.self) { year in
-                    Text("\(year)")
-                        .frame(height: 40)
-                        .frame(maxWidth: .infinity)
-                        .background(
-                            year == currentYear ? style.selectedBackground : Color.clear
-                        )
-                        .foregroundColor(
-                            year == currentYear ? style.selectedText : .primary
-                        )
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .onTapGesture {
-                            var comps = calendar.dateComponents([.month, .day], from: currentDate)
-                            comps.year = year
-                            if let newDate = calendar.date(from: comps) {
-                                currentDate = newDate
-                                selection = newDate
-                                updateCalendar()
-                                showYearPicker = false
-                            }
-                        }
+
+        return Picker("Year", selection: Binding(
+            get: {
+                calendar.component(.year, from: currentDate)
+            },
+            set: { newYear in
+                var comps = calendar.dateComponents([.month, .day], from: currentDate)
+                comps.year = newYear
+                if let newDate = calendar.date(from: comps) {
+                    currentDate = newDate
+                    selection = newDate
+                    updateCalendar()
                 }
             }
-            .padding(.top, 8)
+        )) {
+            ForEach(years, id: \.self) { year in
+                Text("\(year)").tag(year)
+            }
         }
+        .pickerStyle(.wheel)
     }
 }
 

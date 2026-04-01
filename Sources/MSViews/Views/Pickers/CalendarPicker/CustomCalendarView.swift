@@ -374,7 +374,7 @@ public struct CustomCalendarView : View {
                 Text("\(year)").tag(year)
             }
         }
-        .pickerStyle(.wheel)
+        .pickerStyle(.menu)
     }
 }
 

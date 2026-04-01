@@ -60,7 +60,7 @@ public struct CustomToastView: View {
                 RoundedRectangle(cornerRadius: configuration.cornerRadius)
                     .fill(configuration.color(for: toast.type))
                     .shadow(
-                        color: configuration.color(for: toast.type).opacity(0.4),
+                        color: configuration.shadowColor,
                         radius: configuration.shadowRadius,
                         x: configuration.shadowOffset.width,
                         y: configuration.shadowOffset.height

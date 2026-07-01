@@ -187,6 +187,7 @@ public struct OneLineField: View {
                         Text(placeHolder)
                             .font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight)).foregroundColor(placeHolderColor)
                             .allowsHitTesting(false)
+                            .frame(maxWidth: .infinity , alignment: textAlignment)
                     }
                 }
         }

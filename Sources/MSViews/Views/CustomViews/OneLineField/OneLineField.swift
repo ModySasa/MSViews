@@ -30,6 +30,7 @@ public struct OneLineField: View {
     var textColor : Color = .black
     var fieldBackgroundColor : Color = .white
     var height: CGFloat = msViews.margins.mainButtonHeight
+    var textAlignment: Alignment = .leading
     var onSubmit : ((String)->Void)! = nil
     var onTextChange: ((String)->Void)! = nil
     
@@ -56,6 +57,7 @@ public struct OneLineField: View {
         textColor: Color = .black,
         fieldBackgroundColor : Color = .white,
         height: CGFloat = msViews.margins.mainButtonHeight,
+        textAlignment: Alignment = .leading,
         onSubmit:@escaping (String)->Void,
         onTextChange:@escaping (String)->Void
     ) {
@@ -82,6 +84,7 @@ public struct OneLineField: View {
         self.shouldHasBorder = shouldHasBorder
         self.borderColor = borderColor
         self.hasError = hasError
+        self.textAlignment = textAlignment
     }
     
     public var body: some View {
@@ -169,7 +172,7 @@ public struct OneLineField: View {
                 text: textBinding,
 //                prompt: Text(placeHolder).font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight)).foregroundColor(placeHolderColor)
             )
-            .overlay(alignment:.leading){
+            .overlay(alignment:textAlignment){
                 if txt.isEmpty{
                     Text(placeHolder)
                         .font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight)).foregroundColor(placeHolderColor)
@@ -179,7 +182,7 @@ public struct OneLineField: View {
             
         } else {
             TextField("", text: textBinding)
-                .overlay(alignment:.leading){
+                .overlay(alignment:textAlignment){
                     if txt.isEmpty{
                         Text(placeHolder)
                             .font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight)).foregroundColor(placeHolderColor)

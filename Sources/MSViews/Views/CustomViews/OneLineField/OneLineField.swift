@@ -183,6 +183,7 @@ public struct OneLineField: View {
             
         } else {
             TextField("", text: textBinding)
+                .multilineTextAlignment(textAlignment == .leading ? .leading : textAlignment == .center ? .center : .trailing)
                 .frame(maxWidth: .infinity , alignment: textAlignment)
                 .overlay(alignment:textAlignment){
                     if txt.isEmpty{

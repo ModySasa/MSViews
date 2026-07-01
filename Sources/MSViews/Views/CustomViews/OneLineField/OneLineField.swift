@@ -172,6 +172,7 @@ public struct OneLineField: View {
                 text: textBinding,
 //                prompt: Text(placeHolder).font(.custom(getAppFont(textWeight), size: textSize).weight(textWeight)).foregroundColor(placeHolderColor)
             )
+            .frame(maxWidth: .infinity , alignment: textAlignment)
             .overlay(alignment:textAlignment){
                 if txt.isEmpty{
                     Text(placeHolder)
@@ -182,6 +183,7 @@ public struct OneLineField: View {
             
         } else {
             TextField("", text: textBinding)
+                .frame(maxWidth: .infinity , alignment: textAlignment)
                 .overlay(alignment:textAlignment){
                     if txt.isEmpty{
                         Text(placeHolder)
@@ -190,6 +192,7 @@ public struct OneLineField: View {
                             .frame(maxWidth: .infinity , alignment: textAlignment)
                     }
                 }
+                .frame(maxWidth: .infinity , alignment: textAlignment)
         }
     }
     

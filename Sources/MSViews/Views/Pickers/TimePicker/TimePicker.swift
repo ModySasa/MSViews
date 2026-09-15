@@ -20,7 +20,7 @@ public struct TimePicker<Content:View>: View {
         , maxDate : (years:Int? , months:Int? , days:Int?)? = nil
         ,@ViewBuilder content: ()->Content) {
             self._date = date
-            self.oldDate = date.wrappedValue
+            self._oldDate = State(initialValue: date.wrappedValue)
             self.hasCloseButton = hasCloseButton
             self.content = content()
             self.minDate = minDate
